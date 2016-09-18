@@ -2,11 +2,25 @@ package textGame;
 
 public abstract class Item {
 
-	protected int value; // how much the item costs
-	protected int durability; // how much durability the item has
+	/**
+	 * how much the item costs
+	 */
+	protected int value;
 	
-	protected String flavorText; // flavor text for the item
-	protected String name; // name of the Item
+	/**
+	 * how much durability the item has
+	 */
+	protected int durability;
+
+	/**
+	 * flavor text for the item
+	 */
+	protected String flavorText;
+	
+	/**
+	 * name of the Item
+	 */
+	protected String name;
 	
 	/**
 	 * 
@@ -40,5 +54,12 @@ public abstract class Item {
 		return name;
 	}
 	
+	/**
+	 * 
+	 * @return - whether the item is broken or not
+	 */
+	public boolean isBroken() {
+		return durability <= 0;
+	}
 	
 }

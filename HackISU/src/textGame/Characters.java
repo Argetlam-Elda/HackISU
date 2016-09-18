@@ -14,31 +14,89 @@ public abstract class Characters {
 	
 	protected final int proficiencyBonus = 2; // not used as of yet
 	
-	//protected int height;
-	//protected int weight;
-	
+	/**
+	 * the characer's strength
+	 */
 	protected int strength;
+	
+	/**
+	 * the characer's agility
+	 */
 	protected int agility;
+	
+	/**
+	 * the characer's
+	 */
 	protected int defense;
+	
+	/**
+	 * the characer's
+	 */
 	protected int speed;
 	
+	/**
+	 * the characer's max health
+	 */
 	protected int maxHitPoints;
+	
+	/**
+	 * the characer's added HP for certain items
+	 */
 	protected int tempHitPoints;
+	
+	/**
+	 * the characer's current health
+	 */
 	protected int currentHitPoints;
 	
+	/**
+	 * the characer's helmet
+	 */
 	protected Armor helm;
-	protected Armor chestPiece;
-	protected Armor boots;
-	protected Armor leggings;
-	protected Armor gloves;
 	
+	/**
+	 * the characer's chest piece
+	 */
+	protected Armor chestPiece;
+	
+	/**
+	 * the characer's boots
+	 */
+	protected Armor boots;
+	
+	/**
+	 * the characer's leggings
+	 */
+	protected Armor leggings;
+	
+	/**
+	 * the characer's gloves
+	 */
+	protected Armor gloves;
+
+	/**
+	 * the characer's pouch, holds their items and unequipped armor and weapons
+	 */
 	protected ArrayList<Item> pouch;
 	
+	/**
+	 * the characer's equipped melee weapon
+	 */
 	protected Weapon meleeWeapon;
+	
+	/**
+	 * the characer's equipped ranged weapon
+	 */
 	protected Weapon rangedWeapon;
 	
+	/**
+	 * the characer's wallet value
+	 */
 	protected int money;
 	
+	/**
+	 * the characer's title (Player Charater's name)
+	 */
 	protected String title;
 	
 	/**
@@ -118,7 +176,7 @@ public abstract class Characters {
 	 * @return - the characters armor class
 	 */
 	public int getArmorClass() {
-		int AC = (defense-10)/2;
+		int AC = defense;
 		Armor[] equipped = getEquippedArmor();
 		for (int i = 0; i < equipped.length; i++) {
 			AC += equipped[i].getDefence();
@@ -136,7 +194,7 @@ public abstract class Characters {
 	
 	/**
 	 * 
-	 * @return - the name of the character
+	 * @return - the title of the character
 	 */
 	public String getTitle() {
 		return title;
@@ -184,11 +242,11 @@ public abstract class Characters {
 	 * fill armor slots with unequipped item holder
 	 */
 	protected void fillArmorWithUnequipped() {
-		helm = new UnequippedA();
-		chestPiece = new UnequippedA();
-		gloves = new UnequippedA();
-		leggings = new UnequippedA();
-		boots = new UnequippedA();
+		helm = new Armor();
+		chestPiece = new Armor();
+		gloves = new Armor();
+		leggings = new Armor();
+		boots = new Armor();
 	}
 	
 	/**

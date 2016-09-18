@@ -6,17 +6,39 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import textGame.Monster;
+import weapons.Weapon;
 
 public class World {
-	// grid of world cells
+	
+	/**
+	 *  grid of map cells
+	 */
 	public Cell[][] grid;
+	
+	/**
+	 * starting x position in the world
+	 */
 	private int startX;
+	
+	/**
+	 * starting y position in the world
+	 */
 	private int startY;
 	
-	protected ArrayList<Monster> allMonsters;
+	/**
+	 * ArrayList of all monsters that can exist
+	 */
+	public ArrayList<Monster> allMonsters;
 	
-	/*
-	 * Constructor reads from file to create world
+	/**
+	 * ArrayList of all weapons that can exist
+	 */
+	public ArrayList<Weapon> allWeapons;
+	
+	/**
+	 * constructor builds a world from a input file
+	 * @param inputFileName - name of the file to build from
+	 * @throws FileNotFoundException - because there are files involved
 	 */
 	public World(String inputFileName) throws FileNotFoundException {
 		File file = new File(inputFileName);
@@ -55,11 +77,12 @@ public class World {
 			}
 		}
 		scan.close();
+		readWeaponsFromFile();
 		readMonstersFromFile();
 	}
 
 	/**
-	 * builds an ArrayList of all the monsters that can be found in a game
+	 * builds an ArrayList of all the monsters that can be found in the game
 	 * @throws FileNotFoundException
 	 */
 	private void readMonstersFromFile() throws FileNotFoundException {
@@ -79,7 +102,24 @@ public class World {
 		scan.close();
 	}
 	
-
+	/**
+	 * builds an ArrayList of all the weapons that can be found in the game
+	 * @throws FileNotFoundException
+	 */
+	private void readWeaponsFromFile() throws FileNotFoundException {
+		File file = new File("Weapons.txt");
+		Scanner scan = new Scanner(file);
+		allWeapons = new ArrayList<Weapon>();
+		while (scan.hasNext()) {
+			int damage = scan.nextInt();
+			int durability = scan.nextInt();
+			String name = scan.nextLine();
+			String flavor = scan.nextLine();
+			allWeapons.add(new Weapon(name, damage, durability, flavor));
+		}
+		scan.close();
+	}
+	
 	/**
 	 * 
 	 * @return - starting x coord
@@ -98,6 +138,7 @@ public class World {
 	
 	/**
 	 * overrides the toString method, prints the flavor texts
+	 * @return - string containing the flavor text of each cell
 	 */
 	public String toString() {
 		String result = "";
