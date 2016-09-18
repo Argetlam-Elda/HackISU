@@ -1,0 +1,180 @@
+6 6 0 5
+FOREST
+You've heard bad things about going north or west of here, so don't. South lies more trees, as well as east. /
+3 4
+2
+
+FOREST
+North of here lies nothing, there's no point in continuing that way. Forest surrounds you in all other directions. /
+5 5
+1
+
+FOREST
+South of you lies the great town of Sydney. They have a nice opera house. forest surrounds your east and west. and just a straight up void up north. /
+1 3
+5
+
+FOREST
+There appears to be quite the party here. volcano to the east, forest to the west, and meadow to the east. North of you is a wall of uninamigable height. You wonder whats on the other side. /
+1 2
+7
+
+VOLCANO
+You hear the snores of a mighty gorilla to your east. the desolate volcano land continues to the south and a forest sprouts to the west. /
+6 6
+1
+
+VOLCANO
+This is it. The great ape you have been searching for lies before you, towering above. /
+7 7
+1
+
+FOREST
+You are surrounded by spruce trees from everywhere except the west, where the ocean spreads as far as the eye can see. /
+3 3
+2
+
+FOREST
+You see the sprawl of a large city through a clearing in the east. Forest surrounds you everywhere else. /
+3 4
+2
+
+TOWN
+The town of Sydney. They have a pretty cool opera house, but who likes opera? The forest lies north and west of you, with a meadow east and south. /
+0 0
+0
+
+MEADOW
+A strangely peaceful meadow on the edge of the scorched volcano. You see the sprawling city of Sydney to the west and the volcano to the east. There is also the edge of a forest to the north and a larger meadow to the south. /
+4 4
+2
+
+VOLCANO
+The very edge of the scorched earth that is the edge of the volcano. The great ape lies north-east of here. The volcano spreads from the north to the east, with a meadow to the west and a forest to the south. /
+4 5
+2
+
+VOLCANO
+You know that the great ape lies north of you. Now is the time to turn back, if you want. I'm just some text. south is a forest and west is more scorched earth. /
+5 6
+2
+
+Forest
+The beautiful, still ocean on the west  is a drastic difference from the forests that surround you on all other sides. /
+3 3
+1
+
+FOREST
+You can faintly hear the hustle and bustle of Sydney north-east of you. the forest continues in the north and the west, whereas a meadow etends to the south and east. /
+2 3
+3
+
+MEADOW
+North of you lies Sydney, a bustling city. The meadow extends east and south of you, with a forest to the west. /
+3 4
+2
+
+MEADOW
+surrounded by meadow on all but your east side, you wonder where all these monsters are coming from and what their purpose is. But then you remember all the neat stuff you get for killing them and you forget your temporary existential crisis. /
+4 4
+2
+
+FOREST
+You see the beginning of the volcano scorched earth to the north. the forest continues to the south and east, with a meadow to the west. /
+5 5
+1
+
+FOREST
+TODO /
+4 5
+2
+
+FOREST
+The middle of this forest has trees. Imagine that. Actually its all tress. more trees to the north, and a meadow to the east and south. /
+1 2
+2
+
+MEADOW
+TODO /
+1 2
+3
+
+MEADOW
+Meadow surrounds you in all directions. Thats a lot of grass. /
+2 2
+2
+
+MEADOW
+TODO /
+3 4
+1
+
+FOREST
+TODO /
+3 4
+2
+
+FOREST
+TODO /
+3 3
+3
+
+MEADOW
+TODO /
+0 1
+2
+
+MEADOW
+The meadow surrounds you in all directions. Rolling grass and hills everywhere. /
+1 1
+1
+
+MEADOW
+The small village of Melbourne is located east of you. Just plain grass surrounds you everywhere else. /
+1 2
+2
+
+TOWN
+You enter the village of Melbourne. Its a quaint place with a small number of shops and one inn. Meadow surrounds it in all directions. /
+0 0
+0
+
+MEADOW
+TODO /
+2 3
+2
+
+FOREST
+TODO /
+3 3
+2
+
+MEADOW
+Your travels to find and kill the big ape bring you to the south-west of the continent. All you see is meadow and you heard tales of the ape's home located near a volcano in the north east. /
+0 0
+1
+
+MEADOW
+Your travels bring you to another meadow. What a boring place. Only more meadow surrounds you in all directions with a sign stating "Newcastle: 4 cells east". You wonder how far a cell is in meters. /
+0 0
+2
+
+MEADOW
+TODO /
+1 2
+2
+
+MEADOW
+TODO /
+1 2
+3
+
+FOREST
+You know there's a town to the east of you, but you can't see anything through the thick trees. /
+2 2
+2
+
+TOWN
+You enter the bustling town of Newcastle. Shops and inns are plenty here. Ocean surrounds it to the south and east, with forests to the north and west. /
+0 0
+0
