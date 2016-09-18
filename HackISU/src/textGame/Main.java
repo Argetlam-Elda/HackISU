@@ -9,6 +9,10 @@ import weapons.Weapon;
 
 public class Main {
 
+	
+	//testing adding things
+	
+	
 	private static boolean isInit;
 	private static PlayerCharacter player;
 	private static World map;
