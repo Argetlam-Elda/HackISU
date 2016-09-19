@@ -108,7 +108,7 @@ public class TestFrame extends JFrame implements KeyListener {
 		contentPane.setLayout(null);
 		
 		textArea = new JTextArea();
-		textArea.setBounds(12, 12, 1040, 499);
+		textArea.setBounds(12, 12, 1040, 367);
 		textArea.setEditable(false);
 		contentPane.add(textArea);
 		
@@ -133,7 +133,7 @@ public class TestFrame extends JFrame implements KeyListener {
 		contentPane.add(textField_1);
 		
 		textArea_2 = new JTextArea();
-		textArea_2.setBounds(1062, 177, 112, 202);
+		textArea_2.setBounds(1062, 177, 112, 80);
 		textArea_2.setEnabled(false);
 		textArea_2.setEditable(false);
 		contentPane.add(textArea_2);
@@ -147,13 +147,13 @@ public class TestFrame extends JFrame implements KeyListener {
 		textField_2.setEnabled(false);
 		textField_2.setEditable(false);
 		textField_2.setColumns(10);
-		textField_2.setBounds(1062, 390, 112, 20);
+		textField_2.setBounds(1062, 268, 112, 20);
 		contentPane.add(textField_2);
 		
 		textArea_3 = new JTextArea();
 		textArea_3.setEnabled(false);
 		textArea_3.setEditable(false);
-		textArea_3.setBounds(1062, 421, 112, 90);
+		textArea_3.setBounds(1062, 299, 112, 80);
 		contentPane.add(textArea_3);
 		userInput.addKeyListener(this);
 	}
