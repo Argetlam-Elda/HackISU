@@ -23,6 +23,11 @@ public abstract class Item {
 	protected String name;
 	
 	/**
+	 * the difficulty of finding this item, matches the CR of monsters that can have it
+	 */
+	protected int challengeRating;
+	
+	/**
 	 * 
 	 * @return - the Item's durability
 	 */
@@ -48,10 +53,18 @@ public abstract class Item {
 	
 	/**
 	 * 
-	 * @return - return the Item's name
+	 * @return - the Item's name
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	/**
+	 * 
+	 * @return - the items challenge rating
+	 */
+	public int getChallengeRating() {
+		return challengeRating;
 	}
 	
 	/**

@@ -21,7 +21,8 @@ public class Weapon extends Item{
 		name = "unequipped";
 		damage = 0;
 		durability = -1;
-		flavorText = null;
+		flavorText = "";
+		super.challengeRating = -1;
 	}
 	
 	/**
@@ -29,13 +30,15 @@ public class Weapon extends Item{
 	 * @param name - name of the weapon
 	 * @param damage - amount of damage it does
 	 * @param durability - number of hits it can take
+	 * @param challengeRating - the challenge rating of the weapon
 	 * @param flavorText - pretty self explanatory
 	 */
-	public Weapon(String name, int damage, int durability, String flavorText) {
+	public Weapon(String name, int damage, int durability, int challengeRating, String flavorText) {
 		super.name = name;
 		this.damage = damage;
 		super.durability = durability;
 		super.flavorText = flavorText;
+		super.challengeRating = challengeRating;
 	}
 	
 	/**
@@ -48,7 +51,7 @@ public class Weapon extends Item{
 	
 	/**
 	 * 
-	 * @return - the weapons type. currently always returns MELEE
+	 * @return - the weapons type, MELEE or RANGED. currently always returns MELEE
 	 */
 	public WeaponType getType() {
 		return WeaponType.MELEE;

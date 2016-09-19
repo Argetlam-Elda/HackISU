@@ -12,8 +12,6 @@ import weapons.*;
  */
 public abstract class Characters {
 	
-	protected final int proficiencyBonus = 2; // not used as of yet
-	
 	/**
 	 * the characer's strength
 	 */

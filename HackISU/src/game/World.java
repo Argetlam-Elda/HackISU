@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import textGame.Monster;
 import weapons.Weapon;
 
@@ -113,9 +112,10 @@ public class World {
 		while (scan.hasNext()) {
 			int damage = scan.nextInt();
 			int durability = scan.nextInt();
+			int challengeRating = scan.nextInt();
 			String name = scan.nextLine();
 			String flavor = scan.nextLine();
-			allWeapons.add(new Weapon(name, damage, durability, flavor));
+			allWeapons.add(new Weapon(name, damage, durability, challengeRating, flavor));
 		}
 		scan.close();
 	}

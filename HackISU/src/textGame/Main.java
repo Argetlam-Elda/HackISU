@@ -85,6 +85,14 @@ public class Main {
 	}
 	
 	/**
+	 * updates the Weapons display
+	 */
+	public static void updateWeapons() {
+		writeToInfoMid("Weapons",
+				"Melee:\n   " + player.getMeleeWeapon().getName() + "\n   Dmg: " + player.getMeleeWeapon().getDamage() + "\nRanged:\n   " + player.getRangedWeapon().getName() + "\n   Dmg: " + player.getMeleeWeapon().getDamage());
+	}
+	
+	/**
 	 * runs the first time to setup the game
 	 * @param command - the command entered to do things to the game
 	 * @throws FileNotFoundException
@@ -125,6 +133,7 @@ public class Main {
 			firstRun(command);
 		}
 		updatePlayer();
+		updateWeapons();
 		updateMonster();
 	}
 	
