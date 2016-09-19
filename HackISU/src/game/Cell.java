@@ -117,13 +117,11 @@ public class Cell {
 	 */
 	public void resetEnemies() {
 		Random rand = new Random();
-		// if (maxEnemies > 0) {
-		// int numMobs = rand.nextInt(maxEnemies) + 1;
+		int numEnemies = rand.nextInt(maxEnemies + 2);
 		enemies = new ArrayList<Monster>();
-		for (int i = 0; i < maxEnemies; i++) { // always spawns max
+		for (int i = 0; i < numEnemies; i++) { // spawns correct amount
 			enemies.add(new Goblin());
 		}
-		// }
 	}
 	
 }
