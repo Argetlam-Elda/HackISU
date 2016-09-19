@@ -1,4 +1,2 @@
-1 100 0 Foam Sword
-This is the second shittiest melee weapon in the game. Better hope you don't find the worst one.
 1 100 0 Flimsy Bow
 This is the second shittiest ranged weapon in the game. Better hope you don't find the worst one.

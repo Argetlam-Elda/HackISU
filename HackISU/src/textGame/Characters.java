@@ -251,8 +251,8 @@ public abstract class Characters {
 	 * fill weapon slots with unequipped item holder
 	 */
 	protected void fillWeaponsWithUnequipped() {
-		rangedWeapon = new Weapon();
-		meleeWeapon = new Weapon();
+		rangedWeapon = new Ranged();
+		meleeWeapon = new Melee();
 	}
 	
 	

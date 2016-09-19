@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 // import game.Cell;
 import game.World;
-import weapons.Weapon;
+import weapons.Melee;
+import weapons.Ranged;
 
 /**
  * 
@@ -101,8 +102,9 @@ public class Main {
 		isInit = true;
 		player = new PlayerCharacter(command);
 		writeToMain("Your name is " + player.getName());
-		updatePlayer();
 		map = new World("world1-1.txt");
+		player.equipWeapon(map.getMeleeWeapon(0));
+		player.equipWeapon(map.getRangedWeapon(0));
 		locationX = map.getStartX();
 		locationY = map.getStartY();
 		writeToMain(map.grid[locationX][locationY].getFlavor());
@@ -142,10 +144,10 @@ public class Main {
 	 * @param command -the command entered to do things to the game
 	 */
 	public static void attack(String command) {
-		if (!player.getMeleeWeapon().equals(new Weapon()) && command.equalsIgnoreCase("MELEE")) {
+		if (!player.getMeleeWeapon().equals(new Melee()) && command.equalsIgnoreCase("MELEE")) {
 			monsters.get(monsters.size() - 1).takeDamage(player.getMeleeWeapon().getDamage());
 		}
-		else if (!player.getRangedWeapon().equals(new Weapon()) && command.equalsIgnoreCase("RANGED")) {
+		else if (!player.getRangedWeapon().equals(new Ranged()) && command.equalsIgnoreCase("RANGED")) {
 			monsters.get(monsters.size() - 1).takeDamage(player.getRangedWeapon().getDamage());
 		}
 		

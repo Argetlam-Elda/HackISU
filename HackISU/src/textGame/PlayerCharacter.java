@@ -39,7 +39,7 @@ public class PlayerCharacter extends People {
 	 * @param name
 	 *            - Player charater's name
 	 */
-	public PlayerCharacter (String name) {
+	public PlayerCharacter(String name) {
 		title = name;
 		
 		strength = 15;
@@ -105,14 +105,12 @@ public class PlayerCharacter extends People {
 	 */
 	public void unequipWeapon(Weapon unequip) {
 		if (unequip.getType() == WeaponType.MELEE) {
-			pouch.add(meleeWeapon);
-			meleeWeapon = new Weapon(); // might destroy weapon because of
-										// pointers
+			pouch.add(meleeWeapon.clone());
+			meleeWeapon = new Melee();
 		}
 		else if (unequip.getType() == WeaponType.MELEE) {
-			pouch.add(rangedWeapon);
-			rangedWeapon = new Weapon(); // might destroy weapon because of
-											// pointers
+			pouch.add(rangedWeapon.clone());
+			rangedWeapon = new Melee();
 		}
 	}
 	
