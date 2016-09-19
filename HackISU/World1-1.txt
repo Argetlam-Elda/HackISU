@@ -25,7 +25,7 @@ Over the next hill to the east, you see the town of Plainville. It is named that
 2
 
 TOWN
-You enter the town of plainville. There are no monsters here, else there would be other problems. /
+You enter the town of Plainville. There are no monsters here, else there would be other problems. /
 0 0
 0
 

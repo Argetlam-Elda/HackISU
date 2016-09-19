@@ -171,9 +171,9 @@ public abstract class Characters {
 	
 	/**
 	 * 
-	 * @return - the characters armor class
+	 * @return - the characters defense plus armor's defense class
 	 */
-	public int getArmorClass() {
+	public int getTotalDefense() {
 		int AC = defense;
 		Armor[] equipped = getEquippedArmor();
 		for (int i = 0; i < equipped.length; i++) {

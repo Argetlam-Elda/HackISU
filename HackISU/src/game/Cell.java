@@ -3,8 +3,6 @@ package game;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
-
-import mobs.*;
 import textGame.*;
 
 /**
@@ -13,6 +11,11 @@ import textGame.*;
  *
  */
 public class Cell {
+	
+	/**
+	 * the world that this cell is in
+	 */
+	private World world;
 	
 	/**
 	 * terrain the cell will be set to
@@ -57,11 +60,12 @@ public class Cell {
 	 * @param cMax
 	 *            - max enemy level
 	 * @param numEnemies
-	 *            - max number of enemies
+	 *            - max number of enemies 
 	 * @throws FileNotFoundException
 	 *             - because why not
 	 */
-	public Cell (String t, String f, int cMin, int cMax, int numEnemies) throws FileNotFoundException {
+	public Cell (World w, String t, String f, int cMin, int cMax, int numEnemies) throws FileNotFoundException {
+		world = w;
 		terrain = t;
 		flavor = f;
 		combatMin = cMin;
@@ -120,7 +124,11 @@ public class Cell {
 		int numEnemies = rand.nextInt(maxEnemies + 2);
 		enemies = new ArrayList<Monster>();
 		for (int i = 0; i < numEnemies; i++) { // spawns correct amount
-			enemies.add(new Goblin());
+			for (int j = 0; j < world.allMonsters.size(); j++) {
+				if (world.allMonsters.get(j).getChallangeRating() >= combatMin && world.allMonsters.get(j).getChallangeRating() <= combatMax) {
+					enemies.add(world.allMonsters.get(j).clone());
+				}
+			}
 		}
 	}
 	

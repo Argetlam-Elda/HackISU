@@ -66,6 +66,8 @@ public class World {
 		grid = new Cell[width][length];
 		startX = scan.nextInt();
 		startY = scan.nextInt();
+		readWeaponsFromFile();
+		readMonstersFromFile();
 		
 		// run through file to create world
 		for (int i = 0; i < 3 && scan.hasNext(); i++) {
@@ -82,13 +84,11 @@ public class World {
 				combatMax = scan.nextInt();
 				maxEnemies = scan.nextInt();
 				
-				grid[i][j] = new Cell(terrain, flavor, combatMax, combatMin, maxEnemies);
+				grid[i][j] = new Cell(this, terrain, flavor, combatMax, combatMin, maxEnemies);
 				flavor = "";
 			}
 		}
 		scan.close();
-		readWeaponsFromFile();
-		readMonstersFromFile();
 	}
 	
 	/**
@@ -108,6 +108,7 @@ public class World {
 			int speed = scan.nextInt();
 			int maxHP = scan.nextInt();
 			String name = scan.nextLine();
+			name.trim();
 			allMonsters.add(new Monster(name, damage, strength, agility, defence, speed, maxHP));
 		}
 		scan.close();
@@ -180,7 +181,7 @@ public class World {
 	
 	public Melee getMeleeWeapon(int CR) {
 		Random rand = new Random();
-		int skip = rand.nextInt(2);
+		int skip = rand.nextInt(60);
 		// skip = 0; // debug
 		if (CR != -1) {
 			for (int i = 0; i < allMeleeWeapons.size(); i++) {
@@ -202,7 +203,7 @@ public class World {
 	
 	public Weapon getRangedWeapon(int CR) {
 		Random rand = new Random();
-		int skip = rand.nextInt(2);
+		int skip = rand.nextInt(60);
 		// skip = 0; // debug
 		if (CR != -1) {
 			for (int i = 0; i < allRangedWeapons.size(); i++) {
