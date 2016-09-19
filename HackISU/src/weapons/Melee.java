@@ -44,7 +44,7 @@ public class Melee extends Weapon{
 
 	@Override
 	public Weapon clone() {
-		return new Melee();
+		return new Melee(name, damage, durability, challengeRating, flavorText);
 	}
 	
 }

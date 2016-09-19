@@ -91,7 +91,7 @@ public class PlayerCharacter extends People {
 			meleeWeapon = equip;
 			equip = temp;
 		}
-		else if (equip.getType() == WeaponType.MELEE) {
+		else if (equip.getType() == WeaponType.RANGED) {
 			Weapon temp = rangedWeapon;
 			rangedWeapon = equip;
 			equip = temp;
