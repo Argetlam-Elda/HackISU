@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 /**
  * 
- * @author Colt Rogness, Brandon Elizando
+ * @author Colt Rogness, Brandon Elizondo
  *
  */
 @SuppressWarnings("serial")
@@ -27,17 +27,17 @@ public class TestFrame extends JFrame implements KeyListener {
 	/**
 	 * Main text screen, the huge one you retard
 	 */
-	public JTextArea textArea;
+	public JTextArea console;
 	
 	/**
 	 * Top of top info screen
 	 */
-	public JTextField textField;
+	public JTextField playerPane;
 	
 	/**
-	 * Bottom of top info screen
+	 * Top of middle info screen
 	 */
-	public JTextField textField_1;
+	public JTextField weaponPane;
 	
 	/**
 	 * User input bar
@@ -45,24 +45,24 @@ public class TestFrame extends JFrame implements KeyListener {
 	public JTextField userInput;
 	
 	/**
+	 * Bottom of top info screen
+	 */
+	public JTextArea playerInfo;
+	
+	/**
+	 * Bottom of middle info screen
+	 */
+	public JTextArea weaponInfo;
+	
+	/**
 	 * Top of bottom info screen
 	 */
-	public JTextArea textArea_1;
+	public JTextField MonsterPane;
 	
 	/**
 	 * Bottom of bottom info screen
 	 */
-	public JTextArea textArea_2;
-	
-	/**
-	 * top of middle info screen
-	 */
-	public JTextField textField_2;
-	
-	/**
-	 * bottom of middle info screen
-	 */
-	public JTextArea textArea_3;
+	public JTextArea monsterInfo;
 	
 	/**
 	 * stores last command for convenience
@@ -99,62 +99,62 @@ public class TestFrame extends JFrame implements KeyListener {
 	/**
 	 * Create the frame.
 	 */
-	public TestFrame () {
+	public TestFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1200, 600);
+		setBounds(100, 100, 1278, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textArea = new JTextArea();
-		textArea.setBounds(12, 12, 1040, 499);
-		textArea.setEditable(false);
-		contentPane.add(textArea);
+		console = new JTextArea();
+		console.setBounds(12, 12, 1040, 499);
+		console.setEditable(false);
+		contentPane.add(console);
 		
-		textArea_1 = new JTextArea();
-		textArea_1.setBounds(1062, 45, 112, 90);
-		textArea_1.setEnabled(false);
-		textArea_1.setEditable(true);
-		contentPane.add(textArea_1);
+		playerInfo = new JTextArea();
+		playerInfo.setBounds(1062, 45, 190, 90);
+		playerInfo.setEnabled(false);
+		playerInfo.setEditable(true);
+		contentPane.add(playerInfo);
 		
-		textField = new JTextField();
-		textField.setBounds(1062, 14, 112, 20);
-		textField.setEnabled(false);
-		textField.setEditable(false);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		playerPane = new JTextField();
+		playerPane.setBounds(1062, 14, 190, 20);
+		playerPane.setEnabled(false);
+		playerPane.setEditable(false);
+		contentPane.add(playerPane);
+		playerPane.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(1062, 146, 112, 20);
-		textField_1.setEnabled(false);
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
-		contentPane.add(textField_1);
+		weaponPane = new JTextField();
+		weaponPane.setBounds(1062, 146, 190, 20);
+		weaponPane.setEnabled(false);
+		weaponPane.setEditable(false);
+		weaponPane.setColumns(10);
+		contentPane.add(weaponPane);
 		
-		textArea_2 = new JTextArea();
-		textArea_2.setBounds(1062, 177, 112, 202);
-		textArea_2.setEnabled(false);
-		textArea_2.setEditable(false);
-		contentPane.add(textArea_2);
+		weaponInfo = new JTextArea();
+		weaponInfo.setBounds(1062, 177, 190, 202);
+		weaponInfo.setEnabled(false);
+		weaponInfo.setEditable(false);
+		contentPane.add(weaponInfo);
 		
 		userInput = new JTextField();
 		userInput.setBounds(10, 522, 694, 28);
 		contentPane.add(userInput);
 		userInput.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setEnabled(false);
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		textField_2.setBounds(1062, 390, 112, 20);
-		contentPane.add(textField_2);
+		MonsterPane = new JTextField();
+		MonsterPane.setEnabled(false);
+		MonsterPane.setEditable(false);
+		MonsterPane.setColumns(10);
+		MonsterPane.setBounds(1062, 390, 190, 20);
+		contentPane.add(MonsterPane);
 		
-		textArea_3 = new JTextArea();
-		textArea_3.setEnabled(false);
-		textArea_3.setEditable(false);
-		textArea_3.setBounds(1062, 421, 112, 90);
-		contentPane.add(textArea_3);
+		monsterInfo = new JTextArea();
+		monsterInfo.setEnabled(false);
+		monsterInfo.setEditable(false);
+		monsterInfo.setBounds(1062, 421, 190, 129);
+		contentPane.add(monsterInfo);
 		userInput.addKeyListener(this);
 	}
 	
@@ -210,11 +210,11 @@ public class TestFrame extends JFrame implements KeyListener {
 	 * trims the text printed to the console once it gets to long
 	 */
 	public void mainTextCropper() {
-		int lineCount = textArea.getLineCount();
+		int lineCount = console.getLineCount();
 		
 		if (lineCount >= 22) {
 			String temp = "";
-			Scanner textDelete = new Scanner(textArea.getText());
+			Scanner textDelete = new Scanner(console.getText());
 			textDelete.useDelimiter("\\s*>>\\s*");
 			
 			for (int i = 0; i < 12; i++) {
@@ -223,13 +223,15 @@ public class TestFrame extends JFrame implements KeyListener {
 			while (textDelete.hasNext()) {
 				temp += ">>" + textDelete.next() + "\n";
 			}
-			textArea.setText(temp);
+			console.setText(temp);
 			textDelete.close();
 		}
 	}
 	
 	/**
-	 * trims the whitespace of the input string and prints your command to the console, then calls the game's command method
+	 * trims the whitespace of the input string and prints your command to the
+	 * console, then calls the game's command method
+	 * 
 	 * @throws FileNotFoundException
 	 */
 	public void textControl() throws FileNotFoundException {
@@ -239,7 +241,7 @@ public class TestFrame extends JFrame implements KeyListener {
 		Scanner scan = new Scanner(enteredText);
 		if ((enteredText.length() != 0 && scan.hasNext())) {
 			userInput.setText("");
-			textArea.setText(textArea.getText() + ">>" + enteredText + "\n");
+			console.setText(console.getText() + ">>" + enteredText + "\n");
 		}
 		Main.gameCommand(enteredText);
 		mainTextCropper();
@@ -247,15 +249,16 @@ public class TestFrame extends JFrame implements KeyListener {
 	}
 	
 	/**
-	 * this method runs when you hit the up arrow so you can reuse your last command
+	 * this method runs when you hit the up arrow so you can reuse your last
+	 * command
 	 */
 	public void getPreviousCommand() {
-		Scanner textDelete = new Scanner(textArea.getText());
+		Scanner textDelete = new Scanner(console.getText());
 		textDelete.useDelimiter("\\s*>>\\s*");
 		
 		String temp = "";
 		
-		for (int i = 0; i < textArea.getLineCount() - 2; i++) {
+		for (int i = 0; i < console.getLineCount() - 2; i++) {
 			textDelete.next();
 			
 		}

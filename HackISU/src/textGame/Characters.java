@@ -203,7 +203,7 @@ public abstract class Characters {
 	 * @param hit - how much damage you should take
 	 */
 	public void takeDamage(int hit) {
-		currentHitPoints -= hit;
+		currentHitPoints -= Math.max(0, hit - getTotalDefense());
 	}
 	
 	/**

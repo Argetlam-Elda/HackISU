@@ -84,7 +84,7 @@ public class World {
 				combatMax = scan.nextInt();
 				maxEnemies = scan.nextInt();
 				
-				grid[i][j] = new Cell(this, terrain, flavor, combatMax, combatMin, maxEnemies);
+				grid[i][j] = new Cell(this, terrain, flavor, combatMin, combatMax, maxEnemies);
 				flavor = "";
 			}
 		}

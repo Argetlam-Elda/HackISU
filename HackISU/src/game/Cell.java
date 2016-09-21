@@ -60,11 +60,11 @@ public class Cell {
 	 * @param cMax
 	 *            - max enemy level
 	 * @param numEnemies
-	 *            - max number of enemies 
+	 *            - max number of enemies
 	 * @throws FileNotFoundException
 	 *             - because why not
 	 */
-	public Cell (World w, String t, String f, int cMin, int cMax, int numEnemies) throws FileNotFoundException {
+	public Cell(World w, String t, String f, int cMin, int cMax, int numEnemies) throws FileNotFoundException {
 		world = w;
 		terrain = t;
 		flavor = f;
@@ -122,12 +122,22 @@ public class Cell {
 	public void resetEnemies() {
 		Random rand = new Random();
 		int numEnemies = rand.nextInt(maxEnemies + 2);
+		// int skip = rand.nextInt(60);
 		enemies = new ArrayList<Monster>();
 		for (int i = 0; i < numEnemies; i++) { // spawns correct amount
 			for (int j = 0; j < world.allMonsters.size(); j++) {
-				if (world.allMonsters.get(j).getChallangeRating() >= combatMin && world.allMonsters.get(j).getChallangeRating() <= combatMax) {
-					enemies.add(world.allMonsters.get(j).clone());
+				if (world.allMonsters.get(j).getChallangeRating() >= combatMin
+						&& world.allMonsters.get(j).getChallangeRating() <= combatMax) {
+					// if (skip == 0) {
+						enemies.add(world.allMonsters.get(j).clone());
+					// }
+					// else {
+					// 	skip--;
+					// }
 				}
+				// if (j == world.allMonsters.size() - 1) {
+				// 	j = 0;
+				// }
 			}
 		}
 	}

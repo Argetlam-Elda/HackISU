@@ -44,7 +44,7 @@ public class PlayerCharacter extends People {
 		
 		strength = 15;
 		agility = 15;
-		defense = 15;
+		defense = 1;
 		speed = 12;
 		
 		maxHitPoints = 12;
