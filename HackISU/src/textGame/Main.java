@@ -2,11 +2,7 @@ package textGame;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
-// import game.Cell;
 import game.World;
-import weapons.Melee;
-import weapons.Ranged;
 
 /**
  * 
@@ -63,52 +59,49 @@ public class Main {
 	}
 	
 	/**
-	 * updates the players display
+	 * updates the player, weapons, and monsters display
 	 */
-	public static void updatePlayer() {
-		writeToInfoTop(player.getName(),
-				"Agility: " + player.getAgility() + "\nStrength: " + player.getStrength() + "\nDefence: "
-						+ player.getDefense() + "\nSpeed: " + player.getSpeed() + "\nHP: "
-						+ player.getCurrentHitPoints());
-	}
-	
-	/**
-	 * updates the monsters' displays
-	 */
-	public static void updateMonster() {
-		if (monsters == null || monsters.isEmpty()) {
-			writeToInfoBot("Monsters", "");
+	private static void updateInfo() {
+		test.playerInfo.setText("Agility: " + player.getAgility() + "\nStrength: " + player.getStrength()
+				+ "\nDefence: " + player.getDefense() + "\nSpeed: " + player.getSpeed() + "\nHP: "
+				+ player.getCurrentHitPoints() + "\n");
+		test.monsterInfo.setText("");
+		if (monsters != null || !monsters.isEmpty()) {
+			for (int i = 0; i < monsters.size(); i++) {
+				test.monsterInfo.append(monsters.get(i).getTitle() + " Dmg: " + monsters.get(i).getDamage() + " HP: "
+						+ monsters.get(i).getCurrentHitPoints() + "\n");
+			}
 		}
-		else {
-			writeToInfoBot("Monsters", monsters.get(0).getTitle() + ", " + monsters.size() + "x\nHP"
-					+ monsters.get(monsters.size() - 1).getCurrentHitPoints() + "");
-		}
-	}
-	
-	/**
-	 * updates the Weapons display
-	 */
-	public static void updateWeapons() {
-		writeToInfoMid("Weapons",
-				"Melee:\n   " + player.getMeleeWeapon().getName() + "\n   Dmg: " + player.getMeleeWeapon().getDamage() + "\nRanged:\n   " + player.getRangedWeapon().getName() + "\n   Dmg: " + player.getMeleeWeapon().getDamage());
+		test.weaponInfo.setText("Melee:\n   " + player.getMeleeWeapon().getName() + ": Dmg: "
+				+ player.getMeleeWeapon().getDamage() + "\nRanged:\n   " + player.getRangedWeapon().getName()
+				+ ": Dmg: " + player.getMeleeWeapon().getDamage() + "\n");
 	}
 	
 	/**
 	 * runs the first time to setup the game
-	 * @param command - the command entered to do things to the game
+	 * 
+	 * @param command
+	 *            - the command entered to do things to the game
 	 * @throws FileNotFoundException
 	 */
-	public static void firstRun(String command) throws FileNotFoundException {
+	private static void firstRun(String command) throws FileNotFoundException {
 		isInit = true;
 		player = new PlayerCharacter(command);
-		writeToMain("Your name is " + player.getName());
 		map = new World("world1-1.txt");
-		player.equipWeapon(map.getMeleeWeapon(0));
-		player.equipWeapon(map.getRangedWeapon(0));
 		locationX = map.getStartX();
 		locationY = map.getStartY();
-		writeToMain(map.grid[locationX][locationY].getFlavor());
 		monsters = map.grid[locationX][locationY].getEnemies();
+		
+		test.playerPane.setText(player.getName());
+		test.weaponPane.setText("Weapons\n");
+		test.MonsterPane.setText("Monsters\n");
+		
+		player.equipWeapon(map.getMeleeWeapon(0));
+		player.equipWeapon(map.getRangedWeapon(0));
+		
+		writeToMain("Your name is " + player.getName());
+		writeToMain(map.grid[locationX][locationY].getFlavor());
+		
 		if (monsters != null && monsters.size() > 0) {
 			writeToMain("Look Out! There's a monster!");
 		}
@@ -116,8 +109,11 @@ public class Main {
 	
 	/**
 	 * runs every time a command is entered, calls whichever method is relevant
-	 * @param command -the command entered to do things to the game
-	 * @throws FileNotFoundException - because files
+	 * 
+	 * @param command
+	 *            -the command entered to do things to the game
+	 * @throws FileNotFoundException
+	 *             - because files
 	 */
 	public static void gameCommand(String command) throws FileNotFoundException {
 		if (isInit) {
@@ -134,30 +130,28 @@ public class Main {
 		else {
 			firstRun(command);
 		}
-		updatePlayer();
-		updateWeapons();
-		updateMonster();
+		updateInfo();
 	}
 	
 	/**
 	 * runs when there is a monster in the area
-	 * @param command -the command entered to do things to the game
+	 * 
+	 * @param command
+	 *            -the command entered to do things to the game
 	 */
-	public static void attack(String command) {
-		if (!player.getMeleeWeapon().equals(new Melee()) && command.equalsIgnoreCase("MELEE")) {
+	private static void attack(String command) {
+		if (command.equalsIgnoreCase("MELEE")) {
 			monsters.get(monsters.size() - 1).takeDamage(player.getMeleeWeapon().getDamage());
 		}
-		else if (!player.getRangedWeapon().equals(new Ranged()) && command.equalsIgnoreCase("RANGED")) {
+		else if (command.equalsIgnoreCase("RANGED")) {
 			monsters.get(monsters.size() - 1).takeDamage(player.getRangedWeapon().getDamage());
 		}
 		
 		if (!monsters.get(monsters.size() - 1).isAlive()) {
 			monsters.remove(monsters.size() - 1);
-		}
-		if (monsters.isEmpty()) {
 			writeToMain("You killed it. Are you the monster?");
 		}
-		else {
+		if (!monsters.isEmpty()) {
 			for (int i = 0; i < monsters.size(); i++) {
 				player.takeDamage(monsters.get(i).getDamage());
 			}
@@ -166,9 +160,11 @@ public class Main {
 	
 	/**
 	 * runs when there is not a monster in the area
-	 * @param command - the command entered to do things to the game
+	 * 
+	 * @param command
+	 *            - the command entered to do things to the game
 	 */
-	public static void move(String command) {
+	private static void move(String command) {
 		if (command.equalsIgnoreCase("NORTH")) {
 			if (locationX > 0) {
 				locationX -= 1;
@@ -204,52 +200,20 @@ public class Main {
 		}
 		writeToMain(map.grid[locationX][locationY].getFlavor());
 		monsters = map.grid[locationX][locationY].getEnemies();
+		
 		if (monsters != null && monsters.size() > 0) {
 			writeToMain("Look Out! There's a monster!");
 		}
 	}
 	
 	/**
-	 * prints text to the status boxes on the side of the screen
-	 * @param top - text to go in the top part of the box
-	 * @param bottom - text to go in the bottom part of the box
-	 */
-	public static void writeToInfoMid(String top, String bottom) {
-		test.textField_1.setText(top + "\n");
-		
-		test.textArea_2.setText(bottom + "\n");
-		
-	}
-	
-	/**
-	 * prints text to the status boxes on the side of the screen
-	 * @param top - text to go in the top part of the box
-	 * @param bottom - text to go in the bottom part of the box
-	 */
-	public static void writeToInfoBot(String top, String bottom) {
-		test.textField_2.setText(top + "\n");
-		
-		test.textArea_3.setText(bottom + "\n");
-		
-	}
-	
-	/**
-	 * prints text to the status boxes on the side of the screen
-	 * @param top - text to go in the top part of the box
-	 * @param bottom - text to go in the bottom part of the box
-	 */
-	public static void writeToInfoTop(String top, String bottom) {
-		test.textField.setText(top);
-		
-		test.textArea_1.setText(bottom + "\n");
-	}
-	
-	/**
 	 * adds the given text to the bottom of the console
-	 * @param newText - whatever needs printed
+	 * 
+	 * @param newText
+	 *            - whatever needs printed
 	 */
-	public static void writeToMain(String newText) {
-		test.textArea.setText(test.textArea.getText() + ">>" + newText + "\n");
+	private static void writeToMain(String newText) {
+		test.console.setText(test.console.getText() + ">>" + newText + "\n");
 	}
 	
 }
