@@ -1,0 +1,70 @@
+100 7 Dimond Leggings
+leggings
+100 7 Dimond Helmet
+helm
+100 7 Dimond Gloves
+gloves
+100 7 Dimond Breastplate
+chestpiece
+100 7 Dimond Boots
+boots
+100 6 Steel Leggings
+leggings
+100 6 Steel Helm
+helm
+100 6 Steel Gloves
+gloves
+100 6 Steel Breastplate
+chestpiece
+100 6 Steel Boots
+boots
+100 5 Chainmail Leggings
+leggings
+100 5 Chainmail Helmet
+helm
+100 5 Chainmail Gloves
+gloves
+100 5 Chainmail Breastplate
+chestpiece
+100 5 Chainmail Boots
+boots
+100 4 Iron Leggings
+leggings
+100 4 Iron Helm
+helm
+100 4 Iron Gloves
+gloves
+100 4 Iron Breastplate
+chestpiece
+100 4 Iron Boots
+boots
+100 3 Leather Leggings
+leggings
+100 3 Leather Helmet
+helm
+100 3 Leather Gloves
+gloves
+100 3 Leather Breastplate
+chestpiece
+100 3 Leather Boots
+boots
+100 2 Wooden Leggings
+leggings
+100 2 Wooden Helmet
+helm
+100 2 Wooden Gloves
+gloves
+100 2 Wooden Breastplate
+chestpiece
+100 2 Wooden Boots
+boots
+100 1 Foam Leggings
+leggings
+100 1 Foam Helmet
+helm
+100 1 Foam Gloves
+gloves
+100 1 Foam Breastplate
+chestpiece
+100 1 Foam Boots
+boots

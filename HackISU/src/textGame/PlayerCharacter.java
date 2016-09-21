@@ -56,10 +56,10 @@ public class PlayerCharacter extends People {
 		// equipped items
 		fillArmorWithUnequipped();
 		fillWeaponsWithUnequipped();
-		wearableItem1 = new Armor();
-		wearableItem2 = new Armor();
-		wearableItem3 = new Armor();
-		wearableItem4 = new Armor();
+		wearableItem1 = new WearableItem();
+		wearableItem2 = new WearableItem();
+		wearableItem3 = new WearableItem();
+		wearableItem4 = new WearableItem();
 	}
 	
 	/**
@@ -177,40 +177,40 @@ public class PlayerCharacter extends People {
 	public void unEquipArmor(Armor unequip) {
 		if (unequip.getType() == ArmorType.BOOTS) {
 			pouch.add(boots.clone());
-			boots = new Armor();
+			boots = new Boots();
 		}
 		else if (unequip.getType() == ArmorType.CHESTPIECE) {
 			pouch.add(chestPiece.clone());
-			chestPiece = new Armor();
+			chestPiece = new Chestpiece();
 		}
 		else if (unequip.getType() == ArmorType.GLOVES) {
 			pouch.add(gloves.clone());
-			gloves = new Armor();
+			gloves = new Gloves();
 		}
 		else if (unequip.getType() == ArmorType.HELM) {
 			pouch.add(helm.clone());
-			helm = new Armor();
+			helm = new Helm();
 		}
 		else if (unequip.getType() == ArmorType.LEGGINGS) {
 			pouch.add(leggings.clone());
-			leggings = new Armor();
+			leggings = new Leggings();
 		}
 		else if (unequip.getType() == ArmorType.WEARABLEITEM) {
 			if (wearableItem1.getType() == ArmorType.ANY) {
 				pouch.add(wearableItem1.clone());
-				wearableItem1 = new Armor();
+				wearableItem1 = new WearableItem();
 			}
 			else if (wearableItem2.getType() == ArmorType.ANY) {
 				pouch.add(wearableItem2.clone());
-				wearableItem2 = new Armor();
+				wearableItem2 = new WearableItem();
 			}
 			else if (wearableItem3.getType() == ArmorType.ANY) {
 				pouch.add(wearableItem3.clone());
-				wearableItem3 = new Armor();
+				wearableItem3 = new WearableItem();
 			}
 			else if (wearableItem4.getType() == ArmorType.ANY) {
 				pouch.add(wearableItem4.clone());
-				wearableItem4 = new Armor();
+				wearableItem4 = new WearableItem();
 			}
 		}
 		

@@ -7,41 +7,27 @@ import textGame.Item;
  * @author Colt Rogness
  *
  */
-public class Armor extends Item{
+public abstract class Armor extends Item{
 	/**
 	 * amount of defense this armor adds to its wearer
 	 */
-	protected int defence;
-
-	/**
-	 * constructs a new armor with zero defense and no name
-	 */
-	public Armor() {
-		name = "";
-		defence = 0;
-		value = 0;
-		durability = -1;
-	}
+	protected int defense;
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public int getDefence() {
-		return defence;
+	public int getDefense() {
+		return defense;
 	}
 	
 	/**
 	 * 
 	 * @return - the type of armor this is
 	 */
-	public ArmorType getType(){
-		return ArmorType.ANY;
-	}
+	public abstract ArmorType getType();
 	
-	public Item clone() {
-		return new Armor();
-	}
+	public abstract Item clone();
 	
 	
 }

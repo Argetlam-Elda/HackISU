@@ -177,7 +177,7 @@ public abstract class Characters {
 		int AC = defense;
 		Armor[] equipped = getEquippedArmor();
 		for (int i = 0; i < equipped.length; i++) {
-			AC += equipped[i].getDefence();
+			AC += equipped[i].getDefense();
 		}
 		return AC;
 	}
@@ -240,11 +240,11 @@ public abstract class Characters {
 	 * fill armor slots with unequipped item holder
 	 */
 	protected void fillArmorWithUnequipped() {
-		helm = new Armor();
-		chestPiece = new Armor();
-		gloves = new Armor();
-		leggings = new Armor();
-		boots = new Armor();
+		helm = new Helm();
+		chestPiece = new Chestpiece();
+		gloves = new Gloves();
+		leggings = new Leggings();
+		boots = new Boots();
 	}
 	
 	/**
