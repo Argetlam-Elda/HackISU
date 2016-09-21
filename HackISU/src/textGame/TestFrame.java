@@ -223,6 +223,7 @@ public class TestFrame extends JFrame implements KeyListener {
 			while (textDelete.hasNext()) {
 				temp += ">>" + textDelete.next() + "\n";
 			}
+			temp = temp.trim() + "\n";
 			console.setText(temp);
 			textDelete.close();
 		}

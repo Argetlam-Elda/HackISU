@@ -108,7 +108,7 @@ public class World {
 			int speed = scan.nextInt();
 			int maxHP = scan.nextInt();
 			String name = scan.nextLine();
-			name.trim();
+			name = name.trim();
 			allMonsters.add(new Monster(name, damage, strength, agility, defence, speed, maxHP));
 		}
 		scan.close();

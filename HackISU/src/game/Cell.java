@@ -122,23 +122,25 @@ public class Cell {
 	public void resetEnemies() {
 		Random rand = new Random();
 		int numEnemies = rand.nextInt(maxEnemies + 2);
-		// int skip = rand.nextInt(60);
+		int skip = rand.nextInt(60);
 		enemies = new ArrayList<Monster>();
 		for (int i = 0; i < numEnemies; i++) { // spawns correct amount
 			for (int j = 0; j < world.allMonsters.size(); j++) {
 				if (world.allMonsters.get(j).getChallangeRating() >= combatMin
 						&& world.allMonsters.get(j).getChallangeRating() <= combatMax) {
-					// if (skip == 0) {
+					if (skip == 0) {
 						enemies.add(world.allMonsters.get(j).clone());
-					// }
-					// else {
-					// 	skip--;
-					// }
+						break;
+					}
+					else {
+						skip--;
+					}
 				}
-				// if (j == world.allMonsters.size() - 1) {
-				// 	j = 0;
-				// }
+				if (j == world.allMonsters.size() - 1 && skip != 0) {
+					j = -1;
+				}
 			}
+			skip = rand.nextInt(60);
 		}
 	}
 	

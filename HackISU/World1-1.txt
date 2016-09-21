@@ -6,17 +6,17 @@ This is actually a pretty normal place. The volcano is just a normal mountain. /
 
 FOREST
 You find yourself in a forest. You see a mountain in the west, looming over you. To the east, more stupid trees. /
-2 3
+0 3
 2
 
 FOREST
 The forgotten forest. Villagers often forget this place's exsistance. South of you lies Plainville, west of you lies a normal forest. /
-2 3
+0 3
 3
 
 FOREST
 A mountain looms in the north while a meadow of sunshine and butterflies exists in the south. Polar opposites. You are now thinking of ploar bears. /
-1 2
+0 2
 2
 
 MEADOW
