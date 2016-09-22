@@ -1,5 +1,11 @@
 package textGame;
 
+import java.util.ArrayList;
+import java.util.Random;
+
+import armor.ArmorType;
+import game.World;
+
 /**
  * 
  * @author Colt Rogness
@@ -11,6 +17,8 @@ public class Monster extends Characters {
 	 * how much damage the monster can deal
 	 */
 	protected int damage;
+	
+	private World w;
 	
 	/**
 	 * the maonster's challenge rating
@@ -49,7 +57,8 @@ public class Monster extends Characters {
 	 * @param maxHP
 	 *            - the monsters max health
 	 */
-	public Monster(String name, int damage, int strength, int agility, int defense, int speed, int maxHP) {
+	public Monster(World w, String name, int damage, int strength, int agility, int defense, int speed, int maxHP) {
+		this.w = w;
 		title = name;
 		this.damage = damage;
 		super.strength = strength;
@@ -62,6 +71,40 @@ public class Monster extends Characters {
 		currentHitPoints = maxHitPoints;
 		fillWeaponsWithUnequipped();
 		fillArmorWithUnequipped();
+		pouch = new ArrayList<Item>();
+		randomItems();
+	}
+	
+	private void randomItems() {
+		Random rand = new Random();
+		// if (rand.nextBoolean()) {
+		if (false) {
+			int temp = rand.nextInt(2);
+			if (temp == 0) {
+				pouch.add(w.getMeleeWeapon(challengeRating));
+			}
+			else {
+				pouch.add(w.getRangedWeapon(challengeRating));
+			}
+		}
+		else {
+			int temp = rand.nextInt(5);
+			if (temp == 0) {
+				pouch.add(w.getArmor(challengeRating, ArmorType.BOOTS));
+			}
+			if (temp == 1) {
+				pouch.add(w.getArmor(challengeRating, ArmorType.LEGGINGS));
+			}
+			if (temp == 2) {
+				pouch.add(w.getArmor(challengeRating, ArmorType.GLOVES));
+			}
+			if (temp == 3) {
+				pouch.add(w.getArmor(challengeRating, ArmorType.CHESTPIECE));
+			}
+			if (temp == 4) {
+				pouch.add(w.getArmor(challengeRating, ArmorType.HELM));
+			}
+		}
 	}
 	
 	/**
@@ -84,7 +127,7 @@ public class Monster extends Characters {
 	 * clones this monster
 	 */
 	public Monster clone() {
-		return new Monster(title, damage, strength, agility, defense, speed, maxHitPoints);
+		return new Monster(w, title, damage, strength, agility, defense, speed, maxHitPoints);
 	}
 	
 }

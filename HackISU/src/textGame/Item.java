@@ -75,4 +75,9 @@ public abstract class Item {
 		return durability <= 0;
 	}
 	
+	@Override
+	public String toString() {
+		return name;
+	}
+	
 }

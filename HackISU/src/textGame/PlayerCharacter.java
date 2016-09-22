@@ -85,10 +85,10 @@ public class PlayerCharacter extends People {
 	 * @param equip
 	 *            - piece of armor to be equipped
 	 */
-	public void equipWeapon(Weapon equip) {
+	public void equip(Weapon equip) {
 		if (equip.getType() == WeaponType.MELEE) {
-			Weapon temp = meleeWeapon;
-			meleeWeapon = equip;
+			Weapon temp = meleeWeapon.clone();
+			meleeWeapon = equip.clone();
 			equip = temp;
 		}
 		else if (equip.getType() == WeaponType.RANGED) {
@@ -119,7 +119,7 @@ public class PlayerCharacter extends People {
 	 * @param equip
 	 *            - piece of armor to be equipped
 	 */
-	public void equipArmor(Armor equip) {
+	public void equip(Armor equip) {
 		if (equip.getType() == ArmorType.BOOTS) {
 			Armor temp = boots;
 			boots = equip;

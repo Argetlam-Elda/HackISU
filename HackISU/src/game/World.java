@@ -85,8 +85,8 @@ public class World {
 		startX = scan.nextInt();
 		startY = scan.nextInt();
 		readWeaponsFromFile();
-		readMonstersFromFile();
 		readArmorFromFile();
+		readMonstersFromFile();
 		
 		// run through file to create world
 		for (int i = 0; i < 3 && scan.hasNext(); i++) {
@@ -157,7 +157,7 @@ public class World {
 			int maxHP = scan.nextInt();
 			String name = scan.nextLine();
 			name = name.trim();
-			allMonsters.add(new Monster(name, damage, strength, agility, defence, speed, maxHP));
+			allMonsters.add(new Monster(this, name, damage, strength, agility, defence, speed, maxHP));
 		}
 		scan.close();
 	}
@@ -229,7 +229,7 @@ public class World {
 		Random rand = new Random();
 		int skip = rand.nextInt(60);
 		// skip = 0; // debug
-		if (CR != -1) {
+		if (CR > 0) {
 			for (int i = 0; i < allMeleeWeapons.size(); i++) {
 				if (allMeleeWeapons.get(i).getChallengeRating() == CR) {
 					if (skip == 0) {
@@ -251,7 +251,7 @@ public class World {
 		Random rand = new Random();
 		int skip = rand.nextInt(60);
 		// skip = 0; // debug
-		if (CR != -1) {
+		if (CR > 0) {
 			for (int i = 0; i < allRangedWeapons.size(); i++) {
 				if (allRangedWeapons.get(i).getChallengeRating() == CR) {
 					if (skip == 0) {
@@ -272,7 +272,7 @@ public class World {
 	public Armor getArmor(int CR, ArmorType type) {
 		Random rand = new Random();
 		int skip = rand.nextInt(60);
-		if (CR != -1) {
+		if (CR > 0 && CR < 8) {
 			for (int i = 0; i < allArmor.size(); i++) {
 				if (allArmor.get(i).getChallengeRating() == CR && allArmor.get(i).getType() == type) {
 					if (skip == 0) {
