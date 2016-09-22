@@ -2,6 +2,11 @@ package armor;
 
 import textGame.Item;
 
+/**
+ * 
+ * @author Colt Rogness
+ *
+ */
 public class WearableItem extends Armor{
 	
 	/**
@@ -12,6 +17,7 @@ public class WearableItem extends Armor{
 		defense = 0;
 		value = 0;
 		durability = -1;
+		super.challengeRating = defense;
 	}
 	
 	/**
@@ -25,6 +31,7 @@ public class WearableItem extends Armor{
 		super.durability = durability;
 		super.defense = defense;
 		value = durability/10 + defense*10;
+		super.challengeRating = defense;
 	}
 
 	@Override

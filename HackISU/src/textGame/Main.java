@@ -6,7 +6,7 @@ import game.World;
 
 /**
  * 
- * @author Colt Rogness
+ * @author Brandon Elizondo, Colt Rogness
  *
  */
 public class Main {
@@ -15,6 +15,11 @@ public class Main {
 	 * tells whether the world has been initialized yet
 	 */
 	private static boolean isInit;
+	
+	/**
+	 * tells whether you are equipping things
+	 */
+	private static boolean equipping;
 	
 	/**
 	 * the PC, stores stats and items
@@ -59,7 +64,7 @@ public class Main {
 	}
 	
 	/**
-	 * updates the player, weapons, and monsters display
+	 * updates the player, weapons, armor, and monsters display
 	 */
 	private static void updateInfo() {
 		test.playerInfo.setText("Agility: " + player.getAgility() + "\nStrength: " + player.getStrength()
@@ -72,9 +77,15 @@ public class Main {
 						+ monsters.get(i).getCurrentHitPoints() + "\n");
 			}
 		}
-		test.weaponInfo.setText("Melee:\n   " + player.getMeleeWeapon().getName() + ": Dmg: "
-				+ player.getMeleeWeapon().getDamage() + "\nRanged:\n   " + player.getRangedWeapon().getName()
+		test.weaponInfo.setText(player.getMeleeWeapon().getName() + ": Dmg: "
+				+ player.getMeleeWeapon().getDamage() + "\n" + player.getRangedWeapon().getName()
 				+ ": Dmg: " + player.getMeleeWeapon().getDamage() + "\n");
+	}
+	
+	private static void updateLoot() {
+		ArrayList<Item> items = map.grid[locationX][locationY].getItems();
+		for (int i = 0; i < items.size(); i++) {
+			writeToMain("You see a " + items.get(i).getName() + ": " + items.get(i).getFlavorText());		}
 	}
 	
 	/**
@@ -93,16 +104,21 @@ public class Main {
 		monsters = map.grid[locationX][locationY].getEnemies();
 		
 		test.playerPane.setText(player.getName());
-		test.weaponPane.setText("Weapons\n");
+		test.weaponPane.setText("Weapons & Armor\n");
 		test.MonsterPane.setText("Monsters\n");
 		
-		player.equipWeapon(map.getMeleeWeapon(0));
-		player.equipWeapon(map.getRangedWeapon(0));
+		ArrayList<Item> add = new ArrayList<Item>();
+		add.add(map.getMeleeWeapon(1));
+		add.add(map.getRangedWeapon(1));
+		// add.add();
+		map.grid[locationX][locationY].addItems(add);
+		// player.equipWeapon();
+		// player.equipWeapon();
 		
 		writeToMain("Your name is " + player.getName());
 		writeToMain(map.grid[locationX][locationY].getFlavor());
 		
-		if (monsters != null && monsters.size() > 0) {
+		if (monsters != null && !monsters.isEmpty()) {
 			writeToMain("Look Out! There's a monster!");
 		}
 	}
@@ -120,19 +136,35 @@ public class Main {
 			if (command.equals("kill")) {
 				System.exit(0);
 			}
-			else if (monsters == null || monsters.size() == 0) {
-				move(command);
+			else if (monsters != null && monsters.size() > 0) {
+				attack(command);
 			}
 			else {
-				attack(command);
+				move(command);
+				other(command);
 			}
 		}
 		else {
 			firstRun(command);
 		}
 		updateInfo();
+
 	}
 	
+	private static void other(String command) {
+		if (command.equals("loot all") && !map.grid[locationX][locationY].getItems().isEmpty()) {
+			for (int i = map.grid[locationX][locationY].items.size() - 1; i >= 0; i--) {
+				player.addItem(map.grid[locationX][locationY].items.get(i));
+				map.grid[locationX][locationY].items.remove(i);
+			}
+		}
+		if (command.equalsIgnoreCase("LOOK")) {
+			updateLoot();
+			writeToMain(map.grid[locationX][locationY].getFlavor());
+		}
+	}
+	
+
 	/**
 	 * runs when there is a monster in the area
 	 * 
@@ -148,6 +180,7 @@ public class Main {
 		}
 		
 		if (!monsters.get(monsters.size() - 1).isAlive()) {
+			// map.grid[locationX][locationY].addItems(add);
 			monsters.remove(monsters.size() - 1);
 			writeToMain("You killed it. Are you the monster?");
 		}
@@ -168,6 +201,7 @@ public class Main {
 		if (command.equalsIgnoreCase("NORTH")) {
 			if (locationX > 0) {
 				locationX -= 1;
+				writeToMain(map.grid[locationX][locationY].getFlavor());
 			}
 			else {
 				writeToMain("There is nothing to the north");
@@ -176,6 +210,7 @@ public class Main {
 		if (command.equalsIgnoreCase("SOUTH")) {
 			if (locationX < map.grid.length - 1) {
 				locationX += 1;
+				writeToMain(map.grid[locationX][locationY].getFlavor());
 			}
 			else {
 				writeToMain("There is nothing to the south");
@@ -184,7 +219,7 @@ public class Main {
 		if (command.equalsIgnoreCase("EAST")) {
 			if (locationY < map.grid[0].length - 1) {
 				locationY += 1;
-				
+				writeToMain(map.grid[locationX][locationY].getFlavor());
 			}
 			else {
 				writeToMain("There is nothing to the east");
@@ -193,15 +228,15 @@ public class Main {
 		if (command.equalsIgnoreCase("WEST")) {
 			if (locationY > 0) {
 				locationY -= 1;
+				writeToMain(map.grid[locationX][locationY].getFlavor());
 			}
 			else {
 				writeToMain("There is nothing to the west");
 			}
 		}
-		writeToMain(map.grid[locationX][locationY].getFlavor());
 		monsters = map.grid[locationX][locationY].getEnemies();
 		
-		if (monsters != null && monsters.size() > 0) {
+		if (monsters != null && !monsters.isEmpty()) {
 			writeToMain("Look Out! There's a monster!");
 		}
 	}

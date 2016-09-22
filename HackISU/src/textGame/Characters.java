@@ -255,5 +255,30 @@ public abstract class Characters {
 		meleeWeapon = new Melee();
 	}
 	
+	/**
+	 * 
+	 * @param item
+	 *            - item to be dropped
+	 * @return - the item that was dropped, if you had that item. else, drops
+	 *         unequipped placeholder
+	 */
+	public Item dropItem(String name) {
+		for (int i = 0; i < pouch.size(); i++) {
+			if (pouch.get(i).getName().equals(name)) {
+				Item temp = pouch.get(i);
+				pouch.remove(i);
+				return temp;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param item - adds the item to the characters pouch
+	 */
+	public void addItem(Item item) {
+		pouch.add(item);
+	}
 	
 }

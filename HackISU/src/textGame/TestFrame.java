@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 /**
  * 
- * @author Colt Rogness, Brandon Elizondo
+ * @author Brandon Elizondo, Colt Rogness
  *
  */
 @SuppressWarnings("serial")

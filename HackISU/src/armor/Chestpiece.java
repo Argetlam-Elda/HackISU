@@ -2,16 +2,22 @@ package armor;
 
 import textGame.Item;
 
+/**
+ * 
+ * @author Colt Rogness
+ *
+ */
 public class Chestpiece extends Armor{
 	
 	/**
-	 * constructs a new empty Chestpiece
+	 * constructs an empty Chestpiece
 	 */
 	public Chestpiece() {
 		name = "";
 		defense = 0;
 		value = 0;
 		durability = -1;
+		super.challengeRating = defense;
 	}
 	
 	/**
@@ -24,6 +30,7 @@ public class Chestpiece extends Armor{
 		super.defense = defense;
 		super.name = name;
 		value = durability/10 + defense*10;
+		super.challengeRating = defense;
 	}
 
 	@Override

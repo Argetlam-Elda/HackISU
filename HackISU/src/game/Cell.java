@@ -7,7 +7,7 @@ import textGame.*;
 
 /**
  * 
- * @author Colt Rogness
+ * @author Mitchell Bennett, Colt Rogness
  *
  */
 public class Cell {
@@ -49,6 +49,11 @@ public class Cell {
 	private ArrayList<Monster> enemies;
 	
 	/**
+	 * items dropped by monsters/spawned into the world
+	 */
+	public ArrayList<Item> items;
+	
+	/**
 	 * creates a cell object
 	 * 
 	 * @param t
@@ -72,6 +77,7 @@ public class Cell {
 		combatMax = cMax;
 		maxEnemies = numEnemies;
 		
+		items = new ArrayList<Item>();
 		resetEnemies();
 	}
 	
@@ -142,6 +148,22 @@ public class Cell {
 			}
 			skip = rand.nextInt(60);
 		}
+	}
+	
+	/**
+	 * 
+	 * @param add - ArrayList of items to be added
+	 */
+	public void addItems(ArrayList<Item> add) {
+		items.addAll(add);
+	}
+	
+	/**
+	 * 
+	 * @return - all items in the cell
+	 */
+	public ArrayList<Item> getItems() {
+		return items;
 	}
 	
 }

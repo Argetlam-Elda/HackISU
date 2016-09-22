@@ -26,12 +26,12 @@ public class Melee extends Weapon{
 	 * @param challengeRating - the challenge rating of the weapon
 	 * @param flavorText - pretty self explanatory
 	 */
-	public Melee(String name, int damage, int durability, int challengeRating, String flavorText) {
+	public Melee(String name, int damage, int durability, String flavorText) {
 		super.name = name;
 		this.damage = damage;
 		super.durability = durability;
 		super.flavorText = flavorText;
-		super.challengeRating = challengeRating;
+		super.challengeRating = (damage + durability / 100) / 2;
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class Melee extends Weapon{
 
 	@Override
 	public Weapon clone() {
-		return new Melee(name, damage, durability, challengeRating, flavorText);
+		return new Melee(name, damage, durability, flavorText);
 	}
 	
 }

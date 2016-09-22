@@ -5,17 +5,18 @@ import textGame.Item;
 public class Helm extends Armor{
 	
 	/**
-	 * constructs a new empty helm
+	 * constructs an empty helm
 	 */
 	public Helm() {
 		name = "";
 		defense = 0;
 		value = 0;
 		durability = -1;
+		super.challengeRating = defense;
 	}
 	
 	/**
-	 * constructs a new helm with the given stats
+	 * constructs a helm with the given stats
 	 * @param durability - how many hits it can take
 	 * @param defense - how much damage it removes
 	 */
@@ -24,6 +25,7 @@ public class Helm extends Armor{
 		super.defense = defense;
 		super.name = name;
 		value = durability/10 + defense*10;
+		super.challengeRating = defense;
 	}
 
 	@Override

@@ -5,11 +5,24 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+
+import armor.Armor;
+import armor.ArmorType;
+import armor.Boots;
+import armor.Chestpiece;
+import armor.Gloves;
+import armor.Helm;
+import armor.Leggings;
 import textGame.Monster;
 import weapons.Melee;
 import weapons.Ranged;
 import weapons.Weapon;
 
+/**
+ * 
+ * @author Mitchell Bennett, Colt Rogness
+ *
+ */
 public class World {
 	
 	/**
@@ -43,6 +56,11 @@ public class World {
 	public ArrayList<Ranged> allRangedWeapons;
 	
 	/**
+	 * ArrayLsit of all armor in this game
+	 */
+	public ArrayList<Armor> allArmor;
+	
+	/**
 	 * constructor builds a world from a input file
 	 * 
 	 * @param inputFileName
@@ -68,6 +86,7 @@ public class World {
 		startY = scan.nextInt();
 		readWeaponsFromFile();
 		readMonstersFromFile();
+		readArmorFromFile();
 		
 		// run through file to create world
 		for (int i = 0; i < 3 && scan.hasNext(); i++) {
@@ -91,6 +110,35 @@ public class World {
 		scan.close();
 	}
 	
+	private void readArmorFromFile() throws FileNotFoundException {
+		File file = new File("AllArmor.txt");
+		Scanner scan = new Scanner(file);
+		allArmor = new ArrayList<Armor>();
+		while (scan.hasNext()) {
+			int defence = scan.nextInt();
+			int durability = scan.nextInt();
+			String name = scan.nextLine();
+			String type = scan.nextLine();
+			name = name.trim();
+			if (type.equalsIgnoreCase("helm")) {
+				allArmor.add(new Helm(name, defence, durability));
+			}
+			if (type.equalsIgnoreCase("chestpiece")) {
+				allArmor.add(new Chestpiece(name, defence, durability));
+			}
+			if (type.equalsIgnoreCase("gloves")) {
+				allArmor.add(new Gloves(name, defence, durability));
+			}
+			if (type.equalsIgnoreCase("leggings")) {
+				allArmor.add(new Leggings(name, defence, durability));
+			}
+			if (type.equalsIgnoreCase("boots")) {
+				allArmor.add(new Boots(name, defence, durability));
+			}
+		}
+		scan.close();
+	}
+
 	/**
 	 * builds an ArrayList of all the monsters that can be found in the game
 	 * 
@@ -126,10 +174,9 @@ public class World {
 		while (scan.hasNext()) {
 			int damage = scan.nextInt();
 			int durability = scan.nextInt();
-			int challengeRating = scan.nextInt();
 			String name = scan.nextLine();
 			String flavor = scan.nextLine();
-			allMeleeWeapons.add(new Melee(name, damage, durability, challengeRating, flavor));
+			allMeleeWeapons.add(new Melee(name, damage, durability, flavor));
 		}
 		scan.close();
 		
@@ -139,10 +186,9 @@ public class World {
 		while (scan.hasNext()) {
 			int damage = scan.nextInt();
 			int durability = scan.nextInt();
-			int challengeRating = scan.nextInt();
 			String name = scan.nextLine();
 			String flavor = scan.nextLine();
-			allRangedWeapons.add(new Ranged(name, damage, durability, challengeRating, flavor));
+			allRangedWeapons.add(new Ranged(name, damage, durability, flavor));
 		}
 		scan.close();
 	}
@@ -222,5 +268,27 @@ public class World {
 		}
 		return new Ranged();
 	}
+	
+	public Armor getArmor(int CR, ArmorType type) {
+		Random rand = new Random();
+		int skip = rand.nextInt(60);
+		if (CR != -1) {
+			for (int i = 0; i < allArmor.size(); i++) {
+				if (allArmor.get(i).getChallengeRating() == CR && allArmor.get(i).getType() == type) {
+					if (skip == 0) {
+						return allArmor.get(i);
+					}
+					else {
+						skip--;
+					}
+				}
+				if (i == allArmor.size() - 1) {
+					i = -1;
+				}
+			}
+		}
+		return new Chestpiece();
+	}
+	
 	
 }

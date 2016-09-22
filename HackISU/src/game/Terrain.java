@@ -2,7 +2,7 @@ package game;
 
 /**
  * 
- * @author Colt Rogness
+ * @author Mitchell Bennett
  *
  */
 public enum Terrain {

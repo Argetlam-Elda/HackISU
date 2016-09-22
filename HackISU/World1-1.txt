@@ -37,7 +37,7 @@ Full of sunshine and rainbows. Well, just figuratively. /
 MEADOW
 You find yourself in a meadow. to your north, meadow. To the east, meadow. To the west, meadow. You are reminded of the great cornfields of Iowa. /
 0 0
-1
+0
 
 MEADOW
 You see the town of plainville to your north. You wonder if its named that because of location, or how drab the whole place is. /

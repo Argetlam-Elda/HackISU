@@ -1,2 +1,6 @@
-1 100 0 Foam Sword
+1 100 Foam Sword
 This is the second shittiest melee weapon in the game. Better hope you don't find the worst one.
+30 50 Demonic Warscythe
+A sythe used by the demon Kirkland. he was weak as balls, but the sythe was really good.
+15 75 Red Obsidian
+Rapier made of a reddish stone

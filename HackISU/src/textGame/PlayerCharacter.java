@@ -3,7 +3,7 @@ package textGame;
 import java.util.ArrayList;
 
 import armor.*;
-import oneUseItems.*;
+// import oneUseItems.*;
 import weapons.*;
 
 /**
@@ -44,12 +44,12 @@ public class PlayerCharacter extends People {
 		
 		strength = 15;
 		agility = 15;
-		defense = 1;
+		defense = 0;
 		speed = 12;
 		
-		maxHitPoints = 12;
+		maxHitPoints = 15;
 		tempHitPoints = 0;
-		currentHitPoints = maxHitPoints + tempHitPoints;
+		currentHitPoints = maxHitPoints;
 		
 		pouch = new ArrayList<Item>();
 		
@@ -146,22 +146,22 @@ public class PlayerCharacter extends People {
 			equip = temp;
 		}
 		else if (equip.getType() == ArmorType.WEARABLEITEM) {
-			if (wearableItem1.getType() == ArmorType.ANY) {
+			if (wearableItem1.getName().equals("")) {
 				Armor temp = wearableItem1;
 				wearableItem1 = equip;
 				equip = temp;
 			}
-			else if (wearableItem2.getType() == ArmorType.ANY) {
+			else if (wearableItem2.getName().equals("")) {
 				Armor temp = wearableItem2;
 				wearableItem2 = equip;
 				equip = temp;
 			}
-			else if (wearableItem3.getType() == ArmorType.ANY) {
+			else if (wearableItem3.getName().equals("")) {
 				Armor temp = wearableItem3;
 				wearableItem3 = equip;
 				equip = temp;
 			}
-			else if (wearableItem4.getType() == ArmorType.ANY) {
+			else if (wearableItem4.getName().equals("")) {
 				Armor temp = wearableItem4;
 				wearableItem4 = equip;
 				equip = temp;
@@ -216,20 +216,4 @@ public class PlayerCharacter extends People {
 		
 	}
 	
-	/**
-	 * 
-	 * @param item
-	 *            - item to be dropped
-	 * @return - the item that was dropped, if you had that item. else, drops
-	 *         unequipped placeholder
-	 */
-	public Item dropItem(Item item) {
-		for (int i = 0; i < pouch.size(); i++) {
-			if (pouch.get(i) == item) {
-				pouch.remove(i);
-				return item;
-			}
-		}
-		return new OneUseItem();
-	}
 }
