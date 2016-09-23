@@ -212,12 +212,12 @@ public class TestFrame extends JFrame implements KeyListener {
 	public void mainTextCropper() {
 		int lineCount = console.getLineCount();
 		
-		if (lineCount >= 22) {
+		if (lineCount >= 33) {
 			String temp = "";
 			Scanner textDelete = new Scanner(console.getText());
 			textDelete.useDelimiter("\\s*>>\\s*");
 			
-			for (int i = 0; i < 12; i++) {
+			for (int i = 0; i < lineCount - 32; i++) {
 				textDelete.next();
 			}
 			while (textDelete.hasNext()) {
