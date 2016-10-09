@@ -1,18 +1,11 @@
-package armor;
+package items;
 
-import textGame.Item;
-
-/**
- * 
- * @author Colt Rogness
- *
- */
-public class Chestpiece extends Armor{
+public class Helm extends Armor{
 	
 	/**
-	 * constructs an empty Chestpiece
+	 * constructs an empty helm
 	 */
-	public Chestpiece() {
+	public Helm() {
 		name = "";
 		defense = 0;
 		value = 0;
@@ -21,11 +14,11 @@ public class Chestpiece extends Armor{
 	}
 	
 	/**
-	 * constructs a new Chestpiece with the given stats
+	 * constructs a helm with the given stats
 	 * @param durability - how many hits it can take
 	 * @param defense - how much damage it removes
 	 */
-	public Chestpiece(String name, int durability, int defense) {
+	public Helm(String name, int durability, int defense) {
 		super.durability = durability;
 		super.defense = defense;
 		super.name = name;
@@ -35,7 +28,7 @@ public class Chestpiece extends Armor{
 
 	@Override
 	public Item clone() {
-		return new Chestpiece(super.name, super.durability, super.defense);
+		return new Helm(name, durability, defense);
 	}
 	
 	/**
@@ -43,6 +36,7 @@ public class Chestpiece extends Armor{
 	 * @return - the type of armor this is
 	 */
 	public ArmorType getType() {
-		return ArmorType.CHESTPIECE;
+		return ArmorType.HELM;
 	}
+	
 }

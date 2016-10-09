@@ -1,6 +1,4 @@
-package armor;
-
-import textGame.Item;
+package items;
 
 /**
  * 

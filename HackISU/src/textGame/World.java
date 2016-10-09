@@ -1,4 +1,4 @@
-package game;
+package textGame;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,17 +6,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import armor.Armor;
-import armor.ArmorType;
-import armor.Boots;
-import armor.Chestpiece;
-import armor.Gloves;
-import armor.Helm;
-import armor.Leggings;
 import textGame.Monster;
-import weapons.Melee;
-import weapons.Ranged;
-import weapons.Weapon;
+import items.*;
 
 /**
  * 

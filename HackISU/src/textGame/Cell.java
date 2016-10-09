@@ -1,9 +1,10 @@
-package game;
+package textGame;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import textGame.*;
+import items.*;
 
 /**
  * 

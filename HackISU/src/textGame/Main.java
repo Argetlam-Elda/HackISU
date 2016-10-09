@@ -3,10 +3,7 @@ package textGame;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import armor.Armor;
-import armor.ArmorType;
-import game.World;
-import weapons.Weapon;
+import items.*;
 
 /**
  * 

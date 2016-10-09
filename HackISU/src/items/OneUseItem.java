@@ -1,6 +1,4 @@
-package oneUseItems;
-
-import textGame.Item;
+package items;
 
 /**
  * 

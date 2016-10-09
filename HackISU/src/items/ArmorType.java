@@ -1,4 +1,4 @@
-package armor;
+package items;
 /**
  * 
  * @author Colt Rogness

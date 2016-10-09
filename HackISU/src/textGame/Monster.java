@@ -3,8 +3,7 @@ package textGame;
 import java.util.ArrayList;
 import java.util.Random;
 
-import armor.ArmorType;
-import game.World;
+import items.*;
 
 /**
  * 

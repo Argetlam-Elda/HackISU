@@ -2,9 +2,7 @@ package textGame;
 
 import java.util.ArrayList;
 
-import armor.*;
-// import oneUseItems.*;
-import weapons.*;
+import items.*;
 
 /**
  * 

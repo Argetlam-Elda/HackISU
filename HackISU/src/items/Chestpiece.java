@@ -1,18 +1,16 @@
-package armor;
-
-import textGame.Item;
+package items;
 
 /**
  * 
  * @author Colt Rogness
  *
  */
-public class Boots extends Armor{
+public class Chestpiece extends Armor{
 	
 	/**
-	 * constructs an empty boot
+	 * constructs an empty Chestpiece
 	 */
-	public Boots() {
+	public Chestpiece() {
 		name = "";
 		defense = 0;
 		value = 0;
@@ -21,11 +19,11 @@ public class Boots extends Armor{
 	}
 	
 	/**
-	 * constructs a boot with the given stats
+	 * constructs a new Chestpiece with the given stats
 	 * @param durability - how many hits it can take
 	 * @param defense - how much damage it removes
 	 */
-	public Boots(String name, int durability, int defense) {
+	public Chestpiece(String name, int durability, int defense) {
 		super.durability = durability;
 		super.defense = defense;
 		super.name = name;
@@ -35,14 +33,14 @@ public class Boots extends Armor{
 
 	@Override
 	public Item clone() {
-		return new Boots(name, durability, defense);
+		return new Chestpiece(super.name, super.durability, super.defense);
 	}
 	
 	/**
 	 * 
 	 * @return - the type of armor this is
 	 */
-	public ArmorType getType(){
-		return ArmorType.BOOTS;
+	public ArmorType getType() {
+		return ArmorType.CHESTPIECE;
 	}
 }
