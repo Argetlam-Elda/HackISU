@@ -21,12 +21,12 @@ public class Ranged extends Weapon{
 	 * @param challengeRating - the challenge rating of the weapon
 	 * @param flavorText - pretty self explanatory
 	 */
-	public Ranged(String name, int damage, int durability, String flavorText) {
+	public Ranged(String name, int damage, String flavorText) {
 		super.name = name;
 		this.damage = damage;
-		super.durability = durability;
+		super.durability = 200;
 		super.flavorText = flavorText;
-		super.challengeRating = (damage + durability / 100) / 2;
+		super.challengeRating = damage / 2;
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public class Ranged extends Weapon{
 
 	@Override
 	public Weapon clone() {
-		return new Ranged(name, damage, durability, flavorText);
+		return new Ranged(name, durability, flavorText);
 	}
 	
 }

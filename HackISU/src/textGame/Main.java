@@ -82,7 +82,12 @@ public class Main {
 			}
 		}
 		test.weaponInfo.setText(player.getMeleeWeapon().getName() + ": Dmg: " + player.getMeleeWeapon().getDamage()
-				+ "\n" + player.getRangedWeapon().getName() + ": Dmg: " + player.getMeleeWeapon().getDamage() + "\n");
+				+ "\n" + player.getRangedWeapon().getName() + ": Dmg: " + player.getMeleeWeapon().getDamage() + "\n\n");
+		for (int i = 0; i < player.getEquippedArmor().length; i++) {
+			if (!player.getEquippedArmor()[i].getName().equalsIgnoreCase("")) {
+				test.weaponInfo.append(player.getEquippedArmor()[i].toString() + ": Def: " + player.getEquippedArmor()[i].getDefense() + "\n");
+			}
+		}
 	}
 	
 	private static void updateLoot() {
@@ -232,6 +237,7 @@ public class Main {
 	private static void move(String command) {
 		if (command.equalsIgnoreCase("NORTH")) {
 			if (locationX > 0) {
+				map.grid[locationX][locationY].resetEnemies();
 				locationX -= 1;
 				writeToMain(map.grid[locationX][locationY].getFlavor());
 			}
@@ -241,6 +247,7 @@ public class Main {
 		}
 		if (command.equalsIgnoreCase("SOUTH")) {
 			if (locationX < map.grid.length - 1) {
+				map.grid[locationX][locationY].resetEnemies();
 				locationX += 1;
 				writeToMain(map.grid[locationX][locationY].getFlavor());
 			}
@@ -250,6 +257,7 @@ public class Main {
 		}
 		if (command.equalsIgnoreCase("EAST")) {
 			if (locationY < map.grid[0].length - 1) {
+				map.grid[locationX][locationY].resetEnemies();
 				locationY += 1;
 				writeToMain(map.grid[locationX][locationY].getFlavor());
 			}
@@ -259,6 +267,7 @@ public class Main {
 		}
 		if (command.equalsIgnoreCase("WEST")) {
 			if (locationY > 0) {
+				map.grid[locationX][locationY].resetEnemies();
 				locationY -= 1;
 				writeToMain(map.grid[locationX][locationY].getFlavor());
 			}

@@ -173,10 +173,9 @@ public class World {
 		allMeleeWeapons = new ArrayList<Melee>();
 		while (scan.hasNext()) {
 			int damage = scan.nextInt();
-			int durability = scan.nextInt();
 			String name = scan.nextLine();
 			String flavor = scan.nextLine();
-			allMeleeWeapons.add(new Melee(name, damage, durability, flavor));
+			allMeleeWeapons.add(new Melee(name, damage, flavor));
 		}
 		scan.close();
 		
@@ -185,10 +184,9 @@ public class World {
 		allRangedWeapons = new ArrayList<Ranged>();
 		while (scan.hasNext()) {
 			int damage = scan.nextInt();
-			int durability = scan.nextInt();
 			String name = scan.nextLine();
 			String flavor = scan.nextLine();
-			allRangedWeapons.add(new Ranged(name, damage, durability, flavor));
+			allRangedWeapons.add(new Ranged(name, damage, flavor));
 		}
 		scan.close();
 	}
@@ -228,7 +226,6 @@ public class World {
 	public Melee getMeleeWeapon(int CR) {
 		Random rand = new Random();
 		int skip = rand.nextInt(60);
-		// skip = 0; // debug
 		if (CR > 0) {
 			for (int i = 0; i < allMeleeWeapons.size(); i++) {
 				if (allMeleeWeapons.get(i).getChallengeRating() == CR) {
@@ -250,17 +247,16 @@ public class World {
 	public Weapon getRangedWeapon(int CR) {
 		Random rand = new Random();
 		int skip = rand.nextInt(60);
-		// skip = 0; // debug
 		if (CR > 0) {
 			for (int i = 0; i < allRangedWeapons.size(); i++) {
-				if (allRangedWeapons.get(i).getChallengeRating() == CR) {
+				// if (allRangedWeapons.get(i).getChallengeRating() == CR) { // there are only 2 ranged weapons, this will make an infinite loop
 					if (skip == 0) {
 						return allRangedWeapons.get(i);
 					}
 					else {
 						skip--;
 					}
-				}
+				// }
 				if (i == allRangedWeapons.size() - 1) {
 					i = -1;
 				}

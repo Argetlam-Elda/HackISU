@@ -77,10 +77,9 @@ public class Monster extends Characters {
 	
 	private void randomItems() {
 		Random rand = new Random();
-		// if (rand.nextBoolean()) {
-		if (false) {
-			int temp = rand.nextInt(2);
-			if (temp == 0) {
+		if (rand.nextBoolean()) {
+			int temp = rand.nextInt(7);
+			if (temp < 5) {
 				pouch.add(w.getMeleeWeapon(challengeRating));
 			}
 			else {
@@ -90,19 +89,19 @@ public class Monster extends Characters {
 		else {
 			int temp = rand.nextInt(5);
 			if (temp == 0) {
-				pouch.add(w.getArmor(challengeRating, ArmorType.BOOTS));
+				pouch.add(w.getArmor(challengeRating + 1, ArmorType.BOOTS));
 			}
 			if (temp == 1) {
-				pouch.add(w.getArmor(challengeRating, ArmorType.LEGGINGS));
+				pouch.add(w.getArmor(challengeRating + 1, ArmorType.LEGGINGS));
 			}
 			if (temp == 2) {
-				pouch.add(w.getArmor(challengeRating, ArmorType.GLOVES));
+				pouch.add(w.getArmor(challengeRating + 1, ArmorType.GLOVES));
 			}
 			if (temp == 3) {
-				pouch.add(w.getArmor(challengeRating, ArmorType.CHESTPIECE));
+				pouch.add(w.getArmor(challengeRating + 1, ArmorType.CHESTPIECE));
 			}
 			if (temp == 4) {
-				pouch.add(w.getArmor(challengeRating, ArmorType.HELM));
+				pouch.add(w.getArmor(challengeRating + 1, ArmorType.HELM));
 			}
 		}
 	}

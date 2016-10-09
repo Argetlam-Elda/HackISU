@@ -115,14 +115,6 @@ public abstract class Characters {
 	
 	/**
 	 * 
-	 * @return - defense
-	 */
-	public int getDefense() {
-		return defense;
-	}
-	
-	/**
-	 * 
 	 * @return - speed
 	 */
 	public int getSpeed() {
@@ -173,7 +165,7 @@ public abstract class Characters {
 	 * 
 	 * @return - the characters defense plus armor's defense class
 	 */
-	public int getTotalDefense() {
+	public int getDefense() {
 		int AC = defense;
 		Armor[] equipped = getEquippedArmor();
 		for (int i = 0; i < equipped.length; i++) {
@@ -203,7 +195,7 @@ public abstract class Characters {
 	 * @param hit - how much damage you should take
 	 */
 	public void takeDamage(int hit) {
-		currentHitPoints -= Math.max(0, hit - getTotalDefense());
+		currentHitPoints -= Math.max(0, hit - getDefense());
 	}
 	
 	/**
