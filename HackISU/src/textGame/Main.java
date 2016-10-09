@@ -118,7 +118,6 @@ public class Main {
 		add.add(map.getMeleeWeapon(1));
 		add.add(map.getRangedWeapon(1));
 		add.add(map.getArmor(1, ArmorType.CHESTPIECE));
-		// add.add();
 		map.grid[locationX][locationY].addItems(add);
 		// player.equipWeapon(map.getRangedWeapon(1));
 		// player.equipWeapon(map.getMeleeWeapon(1));
@@ -166,13 +165,13 @@ public class Main {
 		for (int i = 0; i < player.getPouch().size(); i++) {
 			if (player.getPouch().get(i).getName().trim().equalsIgnoreCase(command)) {
 				String temp = player.getPouch().get(i).getClass().getName();
-				if (temp.equalsIgnoreCase("weapons.melee") || temp.equalsIgnoreCase("weapons.ranged")) {
+				if (temp.equalsIgnoreCase("items.melee") || temp.equalsIgnoreCase("items.ranged")) {
 					player.equip((Weapon) player.getPouch().get(i));
 					player.pouch.remove(i);
 				}
-				else if (temp.equalsIgnoreCase("Armor.helm") || temp.equalsIgnoreCase("Armor.chestpiece")
-						|| temp.equalsIgnoreCase("Armor.gloves") || temp.equalsIgnoreCase("Armor.leggings")
-						|| temp.equalsIgnoreCase("Armor.boots")) {
+				else if (temp.equalsIgnoreCase("items.helm") || temp.equalsIgnoreCase("items.chestpiece")
+						|| temp.equalsIgnoreCase("items.gloves") || temp.equalsIgnoreCase("items.leggings")
+						|| temp.equalsIgnoreCase("items.boots")) {
 					player.equip((Armor) player.getPouch().get(i));
 					player.pouch.remove(i);
 				}
@@ -188,11 +187,11 @@ public class Main {
 				map.grid[locationX][locationY].items.remove(i);
 			}
 		}
-		if (command.equalsIgnoreCase("LOOK")) {
+		else if (command.equalsIgnoreCase("LOOK")) {
 			updateLoot();
 			writeToMain(map.grid[locationX][locationY].getFlavor());
 		}
-		if (command.equalsIgnoreCase("EQUIP")) {
+		else if (command.equalsIgnoreCase("EQUIP")) {
 			equipping = true;
 			writeToMain(player.getPouch().toString());
 		}

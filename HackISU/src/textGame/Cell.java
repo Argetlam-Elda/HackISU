@@ -129,9 +129,10 @@ public class Cell {
 	public void resetEnemies() {
 		Random rand = new Random();
 		int numEnemies = rand.nextInt(maxEnemies + 2);
-		int skip = rand.nextInt(60);
+		int skip;
 		enemies = new ArrayList<Monster>();
 		for (int i = 0; i < numEnemies; i++) { // spawns correct amount
+			skip = rand.nextInt(60);
 			for (int j = 0; j < world.allMonsters.size(); j++) {
 				if (world.allMonsters.get(j).getChallangeRating() >= combatMin
 						&& world.allMonsters.get(j).getChallangeRating() <= combatMax) {
@@ -147,7 +148,6 @@ public class Cell {
 					j = -1;
 				}
 			}
-			skip = rand.nextInt(60);
 		}
 	}
 	
