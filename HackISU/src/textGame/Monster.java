@@ -88,19 +88,19 @@ public class Monster extends Characters {
 		else {
 			int temp = rand.nextInt(5);
 			if (temp == 0) {
-				pouch.add(w.getArmor(challengeRating + 1, ArmorType.BOOTS));
+				pouch.add(w.getArmor(challengeRating + 1, ItemType.BOOTS));
 			}
 			if (temp == 1) {
-				pouch.add(w.getArmor(challengeRating + 1, ArmorType.LEGGINGS));
+				pouch.add(w.getArmor(challengeRating + 1, ItemType.LEGGINGS));
 			}
 			if (temp == 2) {
-				pouch.add(w.getArmor(challengeRating + 1, ArmorType.GLOVES));
+				pouch.add(w.getArmor(challengeRating + 1, ItemType.GLOVES));
 			}
 			if (temp == 3) {
-				pouch.add(w.getArmor(challengeRating + 1, ArmorType.CHESTPIECE));
+				pouch.add(w.getArmor(challengeRating + 1, ItemType.CHESTPIECE));
 			}
 			if (temp == 4) {
-				pouch.add(w.getArmor(challengeRating + 1, ArmorType.HELM));
+				pouch.add(w.getArmor(challengeRating + 1, ItemType.HELM));
 			}
 		}
 	}

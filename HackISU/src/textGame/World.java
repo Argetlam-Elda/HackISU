@@ -10,9 +10,7 @@ import textGame.Monster;
 import items.*;
 
 /**
- * 
  * @author Mitchell Bennett, Colt Rogness
- *
  */
 public class World {
 	
@@ -21,35 +19,42 @@ public class World {
 	 */
 	public Cell[][] grid;
 	
+	
 	/**
 	 * starting x position in the world
 	 */
 	private int startX;
+	
 	
 	/**
 	 * starting y position in the world
 	 */
 	private int startY;
 	
+	
 	/**
 	 * ArrayList of all monsters that can exist
 	 */
 	public ArrayList<Monster> allMonsters;
 	
+	
 	/**
 	 * ArrayList of all melee weapons that can exist
 	 */
 	public ArrayList<Melee> allMeleeWeapons;
-
+	
+	
 	/**
 	 * ArrayList of all ranged weapons that exist
 	 */
 	public ArrayList<Ranged> allRangedWeapons;
 	
+	
 	/**
 	 * ArrayLsit of all armor in this game
 	 */
 	public ArrayList<Armor> allArmor;
+	
 	
 	/**
 	 * constructor builds a world from a input file
@@ -101,6 +106,13 @@ public class World {
 		scan.close();
 	}
 	
+	
+	/**
+	 * builds an ArrayList of all the pieces of armor that can be found in the game
+	 * 
+	 * @throws FileNotFoundException
+	 *             - in case the file doesn't exist
+	 */
 	private void readArmorFromFile() throws FileNotFoundException {
 		File file = new File("AllArmor.txt");
 		Scanner scan = new Scanner(file);
@@ -108,9 +120,8 @@ public class World {
 		while (scan.hasNext()) {
 			int defence = scan.nextInt();
 			int durability = scan.nextInt();
-			String name = scan.nextLine();
-			String type = scan.nextLine();
-			name = name.trim();
+			String name = scan.nextLine().trim();
+			String type = scan.nextLine().trim();
 			if (type.equalsIgnoreCase("helm")) {
 				allArmor.add(new Helm(name, defence, durability));
 			}
@@ -129,7 +140,8 @@ public class World {
 		}
 		scan.close();
 	}
-
+	
+	
 	/**
 	 * builds an ArrayList of all the monsters that can be found in the game
 	 * 
@@ -146,12 +158,12 @@ public class World {
 			int defence = scan.nextInt();
 			int speed = scan.nextInt();
 			int maxHP = scan.nextInt();
-			String name = scan.nextLine();
-			name = name.trim();
+			String name = scan.nextLine().trim();
 			allMonsters.add(new Monster(this, name, damage, strength, agility, defence, speed, maxHP));
 		}
 		scan.close();
 	}
+	
 	
 	/**
 	 * builds an ArrayList of all the weapons that can be found in the game
@@ -164,8 +176,8 @@ public class World {
 		allMeleeWeapons = new ArrayList<Melee>();
 		while (scan.hasNext()) {
 			int damage = scan.nextInt();
-			String name = scan.nextLine();
-			String flavor = scan.nextLine();
+			String name = scan.nextLine().trim();
+			String flavor = scan.nextLine().trim();
 			allMeleeWeapons.add(new Melee(name, damage, flavor));
 		}
 		scan.close();
@@ -175,28 +187,29 @@ public class World {
 		allRangedWeapons = new ArrayList<Ranged>();
 		while (scan.hasNext()) {
 			int damage = scan.nextInt();
-			String name = scan.nextLine();
-			String flavor = scan.nextLine();
+			String name = scan.nextLine().trim();
+			String flavor = scan.nextLine().trim();
 			allRangedWeapons.add(new Ranged(name, damage, flavor));
 		}
 		scan.close();
 	}
 	
+	
 	/**
-	 * 
 	 * @return - starting x coord
 	 */
 	public int getStartX() {
 		return startX;
 	}
 	
+	
 	/**
-	 * 
 	 * @return - starting y coord
 	 */
 	public int getStartY() {
 		return startY;
 	}
+	
 	
 	/**
 	 * overrides the toString method, prints the flavor texts
@@ -214,6 +227,14 @@ public class World {
 		return result;
 	}
 	
+	
+	/**
+	 * clones a melee weapon from the list with the given challenge rating
+	 * 
+	 * @param CR
+	 *            - challenge rating for the requested weapon
+	 * @return - a new random melee weapon with the given challenge rating
+	 */
 	public Melee getMeleeWeapon(int CR) {
 		Random rand = new Random();
 		int skip = rand.nextInt(60);
@@ -235,18 +256,26 @@ public class World {
 		return new Melee();
 	}
 	
+	
+	/**
+	 * clones a ranged weapon from the list with the given challenge rating
+	 * 
+	 * @param CR
+	 *            - challenge rating for the request weapon
+	 * @return - a new random ranged weapon with the given challenge rating
+	 */
 	public Weapon getRangedWeapon(int CR) {
 		Random rand = new Random();
 		int skip = rand.nextInt(60);
 		if (CR > 0) {
 			for (int i = 0; i < allRangedWeapons.size(); i++) {
-				// if (allRangedWeapons.get(i).getChallengeRating() == CR) { // there are only 2 ranged weapons, this will make an infinite loop
-					if (skip == 0) {
-						return allRangedWeapons.get(i);
-					}
-					else {
-						skip--;
-					}
+				// if (allRangedWeapons.get(i).getChallengeRating() == CR) { // there are only 2 ranged weapons, this line will make an infinite loop
+				if (skip == 0) {
+					return allRangedWeapons.get(i);
+				}
+				else {
+					skip--;
+				}
 				// }
 				if (i == allRangedWeapons.size() - 1) {
 					i = -1;
@@ -256,7 +285,35 @@ public class World {
 		return new Ranged();
 	}
 	
-	public Armor getArmor(int CR, ArmorType type) {
+	
+	/**
+	 * clones a ranged weapon from the list with the given name
+	 * 
+	 * @param name
+	 *            - name of the weapon to return
+	 * @return - a new ranged weapon with the given name
+	 */
+	public Weapon getRangedWeapon(String name) {
+		for (int i = 0; i < allRangedWeapons.size(); i++) {
+			if (allRangedWeapons.get(i).getName().trim().equalsIgnoreCase(name)) {
+				return allRangedWeapons.get(i);
+			}
+		}
+		return null;
+		
+	}
+	
+	
+	/**
+	 * clones a piece of armor from the list with the given type and challenge rating
+	 * 
+	 * @param CR
+	 *            - challenge rating for the requested armor
+	 * @param type
+	 *            - the armor type of the requested armor
+	 * @return - a new piece of armor with the requested type and challenge rating
+	 */
+	public Armor getArmor(int CR, ItemType type) {
 		Random rand = new Random();
 		int skip = rand.nextInt(60);
 		if (CR > 0 && CR < 8) {
@@ -276,6 +333,5 @@ public class World {
 		}
 		return new Chestpiece();
 	}
-	
 	
 }

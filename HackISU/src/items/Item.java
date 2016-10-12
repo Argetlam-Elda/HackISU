@@ -80,4 +80,6 @@ public abstract class Item {
 		return name;
 	}
 	
+	public abstract Item clone();
+	public abstract ItemType getType();
 }

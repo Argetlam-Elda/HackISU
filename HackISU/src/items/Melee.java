@@ -11,7 +11,7 @@ public class Melee extends Weapon{
 	 * constructs a new weapon
 	 */
 	public Melee() {
-		name = "unequipped";
+		name = "";
 		damage = 0;
 		durability = -1;
 		flavorText = "";
@@ -38,8 +38,8 @@ public class Melee extends Weapon{
 	 * 
 	 * @return - the weapons type, MELEE or RANGED. currently always returns MELEE
 	 */
-	public WeaponType getType() {
-		return WeaponType.MELEE;
+	public ItemType getType() {
+		return ItemType.MELEE;
 	}
 
 	@Override

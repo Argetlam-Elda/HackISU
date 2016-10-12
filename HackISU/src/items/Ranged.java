@@ -6,7 +6,7 @@ public class Ranged extends Weapon{
 	 * constructs a new weapon
 	 */
 	public Ranged() {
-		name = "unequipped";
+		name = "";
 		damage = 0;
 		durability = -1;
 		flavorText = "";
@@ -33,8 +33,8 @@ public class Ranged extends Weapon{
 	 * 
 	 * @return - the weapons type, MELEE or RANGED
 	 */
-	public WeaponType getType() {
-		return WeaponType.RANGED;
+	public ItemType getType() {
+		return ItemType.RANGED;
 	}
 
 	@Override

@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import items.*;
 
 /**
- * 
  * @author Brandon Elizondo, Colt Rogness
- *
  */
 public class Main {
 	
@@ -17,40 +15,42 @@ public class Main {
 	 */
 	private static boolean isInit;
 	
-	/**
-	 * tells whether you are equipping things
-	 */
-	private static boolean equipping;
 	
 	/**
 	 * the PC, stores stats and items
 	 */
 	private static PlayerCharacter player;
 	
+	
 	/**
 	 * the map, tells how many enemies and such there are
 	 */
 	private static World map;
+	
 	
 	/**
 	 * the player's x location on the map
 	 */
 	private static int locationX;
 	
+	
 	/**
 	 * the player's y location on the map
 	 */
 	private static int locationY;
+	
 	
 	/**
 	 * the monsters in the current cell, empty if there are none
 	 */
 	private static ArrayList<Monster> monsters;
 	
+	
 	/**
 	 * this is the window, don't fuck with it
 	 */
 	static TestFrame test = new TestFrame();
+	
 	
 	/**
 	 * runs once to setup JFrame
@@ -64,35 +64,47 @@ public class Main {
 		writeToMain("What is your name?");
 	}
 	
+	
 	/**
 	 * updates the player, weapons, armor, and monsters display
 	 */
 	private static void updateInfo() {
-		test.playerInfo.setText("Agility: " + player.getAgility() + "\nStrength: " + player.getStrength()
-				+ "\nDefence: " + player.getDefense() + "\nSpeed: " + player.getSpeed() + "\nHP: "
-				+ player.getCurrentHitPoints() + "\n");
+		test.playerInfo.setText("Agility: " + player.getAgility() + "\nStrength: " + player.getStrength() + "\nDefence: " + player.getDefense() + "\nSpeed: " + player.getSpeed() + "\nHP: " + player.getCurrentHitPoints() + "\n");
 		test.monsterInfo.setText("");
 		if (monsters != null || !monsters.isEmpty()) {
 			for (int i = 0; i < monsters.size(); i++) {
-				test.monsterInfo.append(monsters.get(i).getTitle() + " Dmg: " + monsters.get(i).getDamage() + " HP: "
-						+ monsters.get(i).getCurrentHitPoints() + "\n");
+				test.monsterInfo.append(monsters.get(i).getTitle() + " Dmg: " + monsters.get(i).getDamage() + " HP: " + monsters.get(i).getCurrentHitPoints() + "\n");
 			}
 		}
-		test.weaponInfo.setText(player.getMeleeWeapon().getName() + ": Dmg: " + player.getMeleeWeapon().getDamage()
-				+ "\n" + player.getRangedWeapon().getName() + ": Dmg: " + player.getMeleeWeapon().getDamage() + "\n\n");
+		test.weaponInfo.setText(player.getMeleeWeapon().getName() + ": Dmg: " + player.getMeleeWeapon().getDamage() + "\n" + player.getRangedWeapon().getName() + ": Dmg: " + player.getRangedWeapon().getDamage() + "\n\n");
 		for (int i = 0; i < player.getEquippedArmor().length; i++) {
 			if (!player.getEquippedArmor()[i].getName().equalsIgnoreCase("")) {
-				test.weaponInfo.append(player.getEquippedArmor()[i].toString() + ": Def: " + player.getEquippedArmor()[i].getDefense() + "\n");
+				test.weaponInfo.append(player.getEquippedArmor()[i].getName() + ": Def: " + player.getEquippedArmor()[i].getDefense() + "\n");
+			}
+		}
+		test.droppedItemDisplay.setText("");
+		ArrayList<Item> items = map.grid[locationX][locationY].getItems();
+		if (!items.isEmpty()) {
+			for (int i = 0; i < items.size(); i++) {
+				test.droppedItemDisplay.append(items.get(i).getName() + ", ");
+			}
+		}
+		test.pouchInfo.setText("");
+		if (!player.getPouch().isEmpty()) {
+			for (int i = 0; i < player.getPouch().size(); i++) {
+				Item item = player.getPouch().get(i);
+				test.pouchInfo.append(item.getName());
+				if (item.getClass().getName().matches("(?i)ITEMS.HELM|ITEMS.CHESTPIECE|ITEMS.GLOVES|ITEMS.LEGGINGS|ITEMS.BOOTS")) {
+					test.pouchInfo.append(": Def = " + ((Armor) item).getDefense());
+				} // 75 chars fit in the pane
+				else if (item.getClass().getName().matches("(?i)ITEMS.MELEE|ITEMS.RANGED")) {
+					test.pouchInfo.append(": Dmg = " + ((Weapon) item).getDamage());
+				}
+				test.pouchInfo.append(", ");
 			}
 		}
 	}
 	
-	private static void updateLoot() {
-		ArrayList<Item> items = map.grid[locationX][locationY].getItems();
-		for (int i = 0; i < items.size(); i++) {
-			writeToMain("You see a " + items.get(i).getName() + ": " + items.get(i).getFlavorText());
-		}
-	}
 	
 	/**
 	 * runs the first time to setup the game
@@ -103,7 +115,6 @@ public class Main {
 	 */
 	private static void firstRun(String command) throws FileNotFoundException {
 		isInit = true;
-		equipping = false;
 		player = new PlayerCharacter(command);
 		map = new World("world1-1.txt");
 		locationX = map.getStartX();
@@ -114,21 +125,18 @@ public class Main {
 		test.weaponPane.setText("Weapons & Armor\n");
 		test.MonsterPane.setText("Monsters\n");
 		
-		ArrayList<Item> add = new ArrayList<Item>();
-		add.add(map.getMeleeWeapon(1));
-		add.add(map.getRangedWeapon(1));
-		add.add(map.getArmor(1, ArmorType.CHESTPIECE));
-		map.grid[locationX][locationY].addItems(add);
-		// player.equipWeapon(map.getRangedWeapon(1));
-		// player.equipWeapon(map.getMeleeWeapon(1));
+		player.equip(map.getRangedWeapon(1));
+		player.equip(map.getMeleeWeapon(1));
+		player.equip(map.getArmor(1, ItemType.CHESTPIECE));
 		
-		writeToMain("Your name is " + player.getName());
+		writeToMain("Welcome " + player.getName() + ". Say LOOK to look around, LOOT ITEMNAME to pick up any items you see laying around," + " OPEN BAG to see what items you have, and EQUIP ITEMNAME to equip." + "\n>>To move around the habitat, use the directional commands NORTH, SOUTH, EAST, and WEST." + "\n>>In the column to the right, the top box contains your stats, the second your weapons and armor, and the third contasins the stats for any monsters in the area.");
 		writeToMain(map.grid[locationX][locationY].getFlavor());
 		
 		if (monsters != null && !monsters.isEmpty()) {
 			writeToMain("Look Out! There's a monster!");
 		}
 	}
+	
 	
 	/**
 	 * runs every time a command is entered, calls whichever method is relevant
@@ -140,18 +148,50 @@ public class Main {
 	 */
 	public static void gameCommand(String command) throws FileNotFoundException {
 		if (isInit) {
-			if (command.equals("kill")) {
+			if (command.equals("KILL")) {
 				System.exit(0);
 			}
 			else if (monsters != null && monsters.size() > 0) {
 				attack(command);
 			}
-			else if (equipping) {
+			else if (command.length() >= 4 && command.substring(0, 4).equalsIgnoreCase("LOOT") && !map.grid[locationX][locationY].getItems().isEmpty()) {
+				command = command.substring(4).trim(); // remove the word loot from the beginning and remove whitespace
+				loot(command);
+			}
+			else if (command.length() >= 5 && command.substring(0, 5).equalsIgnoreCase("EQUIP") && !player.getPouch().isEmpty()) {
+				command = command.substring(5).trim(); // remove the word equip from the beginning and remove whitespace
 				equip(command);
+			}
+			else if (command.equalsIgnoreCase("LOOK")) {
+				writeToMain(map.grid[locationX][locationY].getFlavor());
+			}
+			else if (command.equalsIgnoreCase("OPEN BAG")) {
+				writeToMain(player.getPouch().toString());
+			}
+			else if (command.equals("rAre dR0p")) {
+				player.equip(map.getRangedWeapon("furry's gaze"));
+				player.equip(map.getMeleeWeapon(30));
+				player.equip(map.getArmor(7, ItemType.HELM));
+				player.equip(map.getArmor(7, ItemType.CHESTPIECE));
+				player.equip(map.getArmor(7, ItemType.GLOVES));
+				player.equip(map.getArmor(7, ItemType.LEGGINGS));
+				player.equip(map.getArmor(7, ItemType.BOOTS));
+				
+				while (!player.getPouch().isEmpty() && false) {
+					String temp = player.getPouch().get(0).getClass().getName();
+					if (temp.matches("(?i)ITEMS.MELEE|ITEMS.RANGED")) {
+						player.equip(0);
+					}
+					else if (temp.matches("(?i)ITEMS.HELM|ITEMS.CHESTPIECE|ITEMS.GLOVES|ITEMS.LEGGINGS|ITEMS.BOOTS")) {
+						player.equip(0);
+					}
+				}
+			}
+			else if (command.equalsIgnoreCase("fill")) {
+				test.pouchInfo.append("0123456789");
 			}
 			else {
 				move(command);
-				other(command);
 			}
 		}
 		else {
@@ -161,41 +201,35 @@ public class Main {
 		
 	}
 	
+	
 	private static void equip(String command) {
 		for (int i = 0; i < player.getPouch().size(); i++) {
 			if (player.getPouch().get(i).getName().trim().equalsIgnoreCase(command)) {
 				String temp = player.getPouch().get(i).getClass().getName();
-				if (temp.equalsIgnoreCase("items.melee") || temp.equalsIgnoreCase("items.ranged")) {
-					player.equip((Weapon) player.getPouch().get(i));
-					player.pouch.remove(i);
+				if (temp.matches("(?i)ITEMS.MELEE|ITEMS.RANGED")) {
+					player.equip(i);
+					//player.pouch.remove(i);
 				}
-				else if (temp.equalsIgnoreCase("items.helm") || temp.equalsIgnoreCase("items.chestpiece")
-						|| temp.equalsIgnoreCase("items.gloves") || temp.equalsIgnoreCase("items.leggings")
-						|| temp.equalsIgnoreCase("items.boots")) {
-					player.equip((Armor) player.getPouch().get(i));
-					player.pouch.remove(i);
+				else if (temp.matches("(?i)ITEMS.HELM|ITEMS.CHESTPIECE|ITEMS.GLOVES|ITEMS.LEGGINGS|ITEMS.BOOTS")) {
+					player.equip(i);
+					//player.pouch.remove(i);
 				}
 			}
 		}
-		equipping = false;
+		
 	}
 	
-	private static void other(String command) {
-		if (command.equals("loot all") && !map.grid[locationX][locationY].getItems().isEmpty()) {
-			for (int i = map.grid[locationX][locationY].items.size() - 1; i >= 0; i--) {
+	
+	private static void loot(String command) {
+		for (int i = 0; i < map.grid[locationX][locationY].items.size(); i++) {
+			if (map.grid[locationX][locationY].items.get(i).getName().trim().equalsIgnoreCase(command)) {
 				player.addItem(map.grid[locationX][locationY].items.get(i));
 				map.grid[locationX][locationY].items.remove(i);
+				break;
 			}
 		}
-		else if (command.equalsIgnoreCase("LOOK")) {
-			updateLoot();
-			writeToMain(map.grid[locationX][locationY].getFlavor());
-		}
-		else if (command.equalsIgnoreCase("EQUIP")) {
-			equipping = true;
-			writeToMain(player.getPouch().toString());
-		}
 	}
+	
 	
 	/**
 	 * runs when there is a monster in the area
@@ -214,15 +248,19 @@ public class Main {
 		if (!monsters.get(0).isAlive()) {
 			ArrayList<Item> add = monsters.get(0).getPouch();
 			map.grid[locationX][locationY].addItems(add);
+			writeToMain("You killed a " + monsters.get(0).getTitle() + "!");
 			monsters.remove(0);
-			writeToMain("You killed it. Are you the monster?");
 		}
 		if (!monsters.isEmpty()) {
 			for (int i = 0; i < monsters.size(); i++) {
 				player.takeDamage(monsters.get(i).getDamage());
 			}
 		}
+		else {
+			writeToMain("All monsters in the area are dead.");
+		}
 	}
+	
 	
 	/**
 	 * runs when there is not a monster in the area
@@ -277,6 +315,7 @@ public class Main {
 			writeToMain("Look Out! There's a monster!");
 		}
 	}
+	
 	
 	/**
 	 * adds the given text to the bottom of the console

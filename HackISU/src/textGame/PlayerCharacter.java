@@ -84,17 +84,60 @@ public class PlayerCharacter extends People {
 	 *            - piece of armor to be equipped
 	 */
 	public void equip(Weapon equip) {
-		if (equip.getType() == WeaponType.MELEE) {
-			Weapon temp = meleeWeapon.clone();
+		Weapon w = null;
+		if (equip.getType() == ItemType.MELEE) {
+			w = meleeWeapon;
 			meleeWeapon = equip.clone();
-			equip = temp;
 		}
-		else if (equip.getType() == WeaponType.RANGED) {
-			Weapon temp = rangedWeapon;
-			rangedWeapon = equip;
-			equip = temp;
+		else if (equip.getType() == ItemType.RANGED) {
+			w = rangedWeapon;
+			rangedWeapon = equip.clone();
+		}
+		
+		if (w != null && !w.getName().equalsIgnoreCase("")) {
+			pouch.add(w);
 		}
 	}
+	
+	
+	public void equip(int e) {
+		Item temp = null;
+		if (pouch.get(e).getType() == ItemType.MELEE) {
+			temp = meleeWeapon.clone();
+			meleeWeapon = ((Weapon) pouch.get(e)).clone();
+		}
+		else if (pouch.get(e).getType() == ItemType.RANGED) {
+			temp = rangedWeapon.clone();
+			rangedWeapon = ((Weapon) pouch.get(e)).clone();
+		}
+		else if (pouch.get(e).getType() == ItemType.BOOTS) {
+			temp = (Armor) boots.clone();
+			boots = (Armor) pouch.get(e).clone();
+		}
+		else if (pouch.get(e).getType() == ItemType.CHESTPIECE) {
+			temp = (Armor) chestPiece.clone();
+			chestPiece = (Armor) pouch.get(e).clone();
+		}
+		else if (pouch.get(e).getType() == ItemType.GLOVES) {
+			temp = (Armor) gloves.clone();
+			gloves = (Armor) pouch.get(e).clone();
+		}
+		else if (pouch.get(e).getType() == ItemType.HELM) {
+			temp = (Armor) helm.clone();
+			helm = (Armor) pouch.get(e).clone();
+		}
+		else if (pouch.get(e).getType() == ItemType.LEGGINGS) {
+			temp = (Armor) leggings.clone();
+			leggings = (Armor) pouch.get(e).clone();
+		}
+		if (temp != null) {
+			pouch.remove(e);
+			if (!temp.getName().equalsIgnoreCase("")) {
+				pouch.add(temp);
+			}
+		}
+	}
+	
 	
 	/**
 	 * 
@@ -102,13 +145,13 @@ public class PlayerCharacter extends People {
 	 *            - weapon to be unequipped
 	 */
 	public void unequipWeapon(Weapon unequip) {
-		if (unequip.getType() == WeaponType.MELEE) {
+		if (unequip.getType() == ItemType.MELEE) {
 			pouch.add(meleeWeapon.clone());
 			meleeWeapon = new Melee();
 		}
-		else if (unequip.getType() == WeaponType.MELEE) {
+		else if (unequip.getType() == ItemType.RANGED) {
 			pouch.add(rangedWeapon.clone());
-			rangedWeapon = new Melee();
+			rangedWeapon = new Ranged();
 		}
 	}
 	
@@ -118,32 +161,32 @@ public class PlayerCharacter extends People {
 	 *            - piece of armor to be equipped
 	 */
 	public void equip(Armor equip) {
-		if (equip.getType() == ArmorType.BOOTS) {
+		if (equip.getType() == ItemType.BOOTS) {
 			Armor temp = boots;
 			boots = equip;
 			equip = temp;
 		}
-		else if (equip.getType() == ArmorType.CHESTPIECE) {
+		else if (equip.getType() == ItemType.CHESTPIECE) {
 			Armor temp = chestPiece;
 			chestPiece = equip;
 			equip = temp;
 		}
-		else if (equip.getType() == ArmorType.GLOVES) {
+		else if (equip.getType() == ItemType.GLOVES) {
 			Armor temp = gloves;
 			gloves = equip;
 			equip = temp;
 		}
-		else if (equip.getType() == ArmorType.HELM) {
+		else if (equip.getType() == ItemType.HELM) {
 			Armor temp = helm;
 			helm = equip;
 			equip = temp;
 		}
-		else if (equip.getType() == ArmorType.LEGGINGS) {
+		else if (equip.getType() == ItemType.LEGGINGS) {
 			Armor temp = leggings;
 			leggings = equip;
 			equip = temp;
 		}
-		else if (equip.getType() == ArmorType.WEARABLEITEM) {
+		else if (equip.getType() == ItemType.WEARABLE_ITEM) {
 			if (wearableItem1.getName().equals("")) {
 				Armor temp = wearableItem1;
 				wearableItem1 = equip;
@@ -173,40 +216,40 @@ public class PlayerCharacter extends People {
 	 *            - piece of armor to be unequipped
 	 */
 	public void unEquipArmor(Armor unequip) {
-		if (unequip.getType() == ArmorType.BOOTS) {
+		if (unequip.getType() == ItemType.BOOTS) {
 			pouch.add(boots.clone());
 			boots = new Boots();
 		}
-		else if (unequip.getType() == ArmorType.CHESTPIECE) {
+		else if (unequip.getType() == ItemType.CHESTPIECE) {
 			pouch.add(chestPiece.clone());
 			chestPiece = new Chestpiece();
 		}
-		else if (unequip.getType() == ArmorType.GLOVES) {
+		else if (unequip.getType() == ItemType.GLOVES) {
 			pouch.add(gloves.clone());
 			gloves = new Gloves();
 		}
-		else if (unequip.getType() == ArmorType.HELM) {
+		else if (unequip.getType() == ItemType.HELM) {
 			pouch.add(helm.clone());
 			helm = new Helm();
 		}
-		else if (unequip.getType() == ArmorType.LEGGINGS) {
+		else if (unequip.getType() == ItemType.LEGGINGS) {
 			pouch.add(leggings.clone());
 			leggings = new Leggings();
 		}
-		else if (unequip.getType() == ArmorType.WEARABLEITEM) {
-			if (wearableItem1.getType() == ArmorType.ANY) {
+		else if (unequip.getType() == ItemType.WEARABLE_ITEM) {
+			if (wearableItem1.getType() == ItemType.ANY) {
 				pouch.add(wearableItem1.clone());
 				wearableItem1 = new WearableItem();
 			}
-			else if (wearableItem2.getType() == ArmorType.ANY) {
+			else if (wearableItem2.getType() == ItemType.ANY) {
 				pouch.add(wearableItem2.clone());
 				wearableItem2 = new WearableItem();
 			}
-			else if (wearableItem3.getType() == ArmorType.ANY) {
+			else if (wearableItem3.getType() == ItemType.ANY) {
 				pouch.add(wearableItem3.clone());
 				wearableItem3 = new WearableItem();
 			}
-			else if (wearableItem4.getType() == ArmorType.ANY) {
+			else if (wearableItem4.getType() == ItemType.ANY) {
 				pouch.add(wearableItem4.clone());
 				wearableItem4 = new WearableItem();
 			}

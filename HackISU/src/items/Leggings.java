@@ -32,7 +32,7 @@ public class Leggings extends Armor{
 	}
 
 	@Override
-	public Item clone() {
+	public Leggings clone() {
 		return new Leggings(name, durability, defense);
 	}
 	
@@ -40,7 +40,7 @@ public class Leggings extends Armor{
 	 * 
 	 * @return - the type of armor this is
 	 */
-	public ArmorType getType(){
-		return ArmorType.LEGGINGS;
+	public ItemType getType(){
+		return ItemType.LEGGINGS;
 	}
 }

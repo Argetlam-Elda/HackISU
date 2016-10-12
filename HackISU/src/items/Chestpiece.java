@@ -32,7 +32,7 @@ public class Chestpiece extends Armor{
 	}
 
 	@Override
-	public Item clone() {
+	public Chestpiece clone() {
 		return new Chestpiece(super.name, super.durability, super.defense);
 	}
 	
@@ -40,7 +40,7 @@ public class Chestpiece extends Armor{
 	 * 
 	 * @return - the type of armor this is
 	 */
-	public ArmorType getType() {
-		return ArmorType.CHESTPIECE;
+	public ItemType getType() {
+		return ItemType.CHESTPIECE;
 	}
 }

@@ -23,9 +23,13 @@ public abstract class Armor extends Item{
 	 * 
 	 * @return - the type of armor this is
 	 */
-	public abstract ArmorType getType();
+	public abstract ItemType getType();
 	
 	public abstract Item clone();
 	
+	@Override
+	public String toString() {
+		return name + ": Def = " + defense;
+	}
 	
 }

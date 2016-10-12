@@ -25,18 +25,17 @@ public class Helm extends Armor{
 		value = durability/10 + defense*10;
 		super.challengeRating = defense;
 	}
-
-	@Override
-	public Item clone() {
-		return new Helm(name, durability, defense);
-	}
 	
 	/**
 	 * 
 	 * @return - the type of armor this is
 	 */
-	public ArmorType getType() {
-		return ArmorType.HELM;
+	public ItemType getType() {
+		return ItemType.HELM;
+	}
+	
+	public Helm clone() {
+		return new Helm(name, durability, defense);
 	}
 	
 }

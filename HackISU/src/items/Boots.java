@@ -32,7 +32,7 @@ public class Boots extends Armor{
 	}
 
 	@Override
-	public Item clone() {
+	public Boots clone() {
 		return new Boots(name, durability, defense);
 	}
 	
@@ -40,7 +40,7 @@ public class Boots extends Armor{
 	 * 
 	 * @return - the type of armor this is
 	 */
-	public ArmorType getType(){
-		return ArmorType.BOOTS;
+	public ItemType getType(){
+		return ItemType.BOOTS;
 	}
 }

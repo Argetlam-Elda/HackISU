@@ -20,7 +20,11 @@ public abstract class Weapon extends Item {
 		return damage;
 	}
 	
-	public abstract WeaponType getType();
+	public abstract ItemType getType();
 	public abstract Weapon clone();
 	
+	@Override
+	public String toString() {
+		return name + ": Dmg = " + damage;
+	}
 }

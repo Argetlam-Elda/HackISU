@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import javax.swing.DropMode;
 
 /**
  * 
@@ -65,6 +66,16 @@ public class TestFrame extends JFrame implements KeyListener {
 	public JTextArea monsterInfo;
 	
 	/**
+	 * shows contents of the pouch
+	 */
+	public JTextArea pouchInfo;
+	
+	/**
+	 * 
+	 */
+	public JTextArea droppedItemDisplay;
+	
+	/**
 	 * stores last command for convenience
 	 */
 	public String previousCommand = "";
@@ -108,7 +119,7 @@ public class TestFrame extends JFrame implements KeyListener {
 		contentPane.setLayout(null);
 		
 		console = new JTextArea();
-		console.setBounds(12, 12, 1040, 499);
+		console.setBounds(12, 12, 1040, 457);
 		console.setEditable(false);
 		contentPane.add(console);
 		
@@ -133,7 +144,7 @@ public class TestFrame extends JFrame implements KeyListener {
 		contentPane.add(weaponPane);
 		
 		weaponInfo = new JTextArea();
-		weaponInfo.setBounds(1062, 177, 190, 202);
+		weaponInfo.setBounds(1062, 177, 190, 129);
 		weaponInfo.setEnabled(false);
 		weaponInfo.setEditable(false);
 		contentPane.add(weaponInfo);
@@ -142,19 +153,32 @@ public class TestFrame extends JFrame implements KeyListener {
 		userInput.setBounds(10, 522, 694, 28);
 		contentPane.add(userInput);
 		userInput.setColumns(10);
+		userInput.requestFocusInWindow();
 		
 		MonsterPane = new JTextField();
 		MonsterPane.setEnabled(false);
 		MonsterPane.setEditable(false);
 		MonsterPane.setColumns(10);
-		MonsterPane.setBounds(1062, 390, 190, 20);
+		MonsterPane.setBounds(1062, 317, 190, 20);
 		contentPane.add(MonsterPane);
 		
 		monsterInfo = new JTextArea();
 		monsterInfo.setEnabled(false);
 		monsterInfo.setEditable(false);
-		monsterInfo.setBounds(1062, 421, 190, 129);
+		monsterInfo.setBounds(1062, 348, 190, 121);
 		contentPane.add(monsterInfo);
+		
+		pouchInfo = new JTextArea();
+		pouchInfo.setEnabled(false);
+		pouchInfo.setEditable(true);
+		pouchInfo.setBounds(714, 480, 538, 70);
+		contentPane.add(pouchInfo);
+		
+		droppedItemDisplay = new JTextArea();
+		droppedItemDisplay.setEnabled(false);
+		droppedItemDisplay.setEditable(true);
+		droppedItemDisplay.setBounds(12, 483, 692, 28);
+		contentPane.add(droppedItemDisplay);
 		userInput.addKeyListener(this);
 	}
 	
@@ -212,12 +236,12 @@ public class TestFrame extends JFrame implements KeyListener {
 	public void mainTextCropper() {
 		int lineCount = console.getLineCount();
 		
-		if (lineCount >= 33) {
+		if (lineCount >= 30) {
 			String temp = "";
 			Scanner textDelete = new Scanner(console.getText());
 			textDelete.useDelimiter("\\s*>>\\s*");
 			
-			for (int i = 0; i < lineCount - 32; i++) {
+			for (int i = 0; i < lineCount - 29; i++) {
 				textDelete.next();
 			}
 			while (textDelete.hasNext()) {
@@ -269,5 +293,4 @@ public class TestFrame extends JFrame implements KeyListener {
 		previousCommand = temp;
 		textDelete.close();
 	}
-	
 }

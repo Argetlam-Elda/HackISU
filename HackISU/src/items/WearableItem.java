@@ -37,7 +37,7 @@ public class WearableItem extends Armor{
 		return new WearableItem(name, durability, defense);
 	}
 	
-	public ArmorType getType() {
-		return ArmorType.WEARABLEITEM;
+	public ItemType getType() {
+		return ItemType.WEARABLE_ITEM;
 	}
 }
