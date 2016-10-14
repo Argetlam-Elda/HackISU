@@ -152,6 +152,33 @@ public abstract class Characters {
 	}
 	
 	/**
+	 * sell the given item if it is in the player's pouch
+	 * @param item - item to be sold
+	 */
+	public void sell(Item item) {
+		for (int i = 0; i < pouch.size(); i++) {
+			if (item.equals(pouch.get(i))) {
+				money += pouch.get(i).getValue();
+				pouch.remove(i);
+			}
+		}
+	}
+	
+	/**
+	 * sell an item with the given name if there is one in the player's pouch
+	 * @param name
+	 */
+	public void sell(String name) {
+		for (int i = 0; i < pouch.size(); i++) {
+			if (name.equalsIgnoreCase(pouch.get(i).getName())) {
+				money += pouch.get(i).getValue();
+				pouch.remove(i);
+				break;
+			}
+		}
+	}
+	
+	/**
 	 * 
 	 * @return - the character's items
 	 */

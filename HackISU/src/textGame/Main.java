@@ -69,7 +69,7 @@ public class Main {
 	 * updates the player, weapons, armor, and monsters display
 	 */
 	private static void updateInfo() {
-		test.playerInfo.setText("Agility: " + player.getAgility() + "\nStrength: " + player.getStrength() + "\nDefence: " + player.getDefense() + "\nSpeed: " + player.getSpeed() + "\nHP: " + player.getCurrentHitPoints() + "\n");
+		test.playerInfo.setText("Agility: " + player.getAgility() + "\nStrength: " + player.getStrength() + "\nDefence: " + player.getDefense() + "\nSpeed: " + player.getSpeed() + "\nHP: " + player.getCurrentHitPoints() + "\nWallet: $" + player.getMoney());
 		test.monsterInfo.setText("");
 		if (monsters != null || !monsters.isEmpty()) {
 			for (int i = 0; i < monsters.size(); i++) {
@@ -86,13 +86,19 @@ public class Main {
 		ArrayList<Item> items = map.grid[locationX][locationY].getItems();
 		if (!items.isEmpty()) {
 			for (int i = 0; i < items.size(); i++) {
-				test.droppedItemDisplay.append(items.get(i).getName() + ", ");
+				if (i != 0) {
+					test.droppedItemDisplay.append(", ");
+				}
+				test.droppedItemDisplay.append(items.get(i).getName());
 			}
 		}
 		test.pouchInfo.setText("");
 		if (!player.getPouch().isEmpty()) {
 			for (int i = 0; i < player.getPouch().size(); i++) {
 				Item item = player.getPouch().get(i);
+				if (i != 0) {
+					test.pouchInfo.append(", ");
+				}
 				test.pouchInfo.append(item.getName());
 				if (item.getClass().getName().matches("(?i)ITEMS.HELM|ITEMS.CHESTPIECE|ITEMS.GLOVES|ITEMS.LEGGINGS|ITEMS.BOOTS")) {
 					test.pouchInfo.append(": Def = " + ((Armor) item).getDefense());
@@ -100,7 +106,6 @@ public class Main {
 				else if (item.getClass().getName().matches("(?i)ITEMS.MELEE|ITEMS.RANGED")) {
 					test.pouchInfo.append(": Dmg = " + ((Weapon) item).getDamage());
 				}
-				test.pouchInfo.append(", ");
 			}
 		}
 	}
@@ -129,7 +134,7 @@ public class Main {
 		player.equip(map.getMeleeWeapon(1));
 		player.equip(map.getArmor(1, ItemType.CHESTPIECE));
 		
-		writeToMain("Welcome " + player.getName() + ". Say LOOK to look around, LOOT ITEMNAME to pick up any items you see laying around," + " OPEN BAG to see what items you have, and EQUIP ITEMNAME to equip." + "\n>>To move around the habitat, use the directional commands NORTH, SOUTH, EAST, and WEST." + "\n>>In the column to the right, the top box contains your stats, the second your weapons and armor, and the third contasins the stats for any monsters in the area.");
+		writeToMain("Welcome " + player.getName() + ". Say LOOK to look around, LOOT ITEMNAME to pick up any items you see laying around, OPEN BAG to see what items you have, and EQUIP ITEMNAME to equip. To move around the habitat, use the directional commands NORTH, SOUTH, EAST, and WEST. In the column to the right, the top box contains your stats, the second your weapons and armor, and the third contasins the stats for any monsters in the area.");
 		writeToMain(map.grid[locationX][locationY].getFlavor());
 		
 		if (monsters != null && !monsters.isEmpty()) {
@@ -162,6 +167,10 @@ public class Main {
 				command = command.substring(5).trim(); // remove the word equip from the beginning and remove whitespace
 				equip(command);
 			}
+			else if (command.length() >= 4 && command.substring(0, 4).equalsIgnoreCase("SELL") && !player.getPouch().isEmpty()) {
+				command = command.substring(4).trim(); // remove the word sell from the beginning and remove whitespace
+				player.sell(command);
+			}
 			else if (command.equalsIgnoreCase("LOOK")) {
 				writeToMain(map.grid[locationX][locationY].getFlavor());
 			}
@@ -177,15 +186,6 @@ public class Main {
 				player.equip(map.getArmor(7, ItemType.LEGGINGS));
 				player.equip(map.getArmor(7, ItemType.BOOTS));
 				
-				while (!player.getPouch().isEmpty() && false) {
-					String temp = player.getPouch().get(0).getClass().getName();
-					if (temp.matches("(?i)ITEMS.MELEE|ITEMS.RANGED")) {
-						player.equip(0);
-					}
-					else if (temp.matches("(?i)ITEMS.HELM|ITEMS.CHESTPIECE|ITEMS.GLOVES|ITEMS.LEGGINGS|ITEMS.BOOTS")) {
-						player.equip(0);
-					}
-				}
 			}
 			else if (command.equalsIgnoreCase("fill")) {
 				test.pouchInfo.append("0123456789");
@@ -208,11 +208,11 @@ public class Main {
 				String temp = player.getPouch().get(i).getClass().getName();
 				if (temp.matches("(?i)ITEMS.MELEE|ITEMS.RANGED")) {
 					player.equip(i);
-					//player.pouch.remove(i);
+					// player.pouch.remove(i);
 				}
 				else if (temp.matches("(?i)ITEMS.HELM|ITEMS.CHESTPIECE|ITEMS.GLOVES|ITEMS.LEGGINGS|ITEMS.BOOTS")) {
 					player.equip(i);
-					//player.pouch.remove(i);
+					// player.pouch.remove(i);
 				}
 			}
 		}

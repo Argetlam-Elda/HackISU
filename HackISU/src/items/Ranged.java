@@ -27,6 +27,7 @@ public class Ranged extends Weapon{
 		super.durability = 200;
 		super.flavorText = flavorText;
 		super.challengeRating = damage / 2;
+		super.value = damage;
 	}
 	
 	/**
