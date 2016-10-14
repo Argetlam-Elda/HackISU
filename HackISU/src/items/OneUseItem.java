@@ -27,10 +27,15 @@ public class OneUseItem extends Item {
 	 * constructs a consumable item with the given stats
 	 * 
 	 * @param name
+	 *            - name of the item
 	 * @param flavor
+	 *            - flavor text
 	 * @param durability
+	 *            - items durability
 	 * @param value
+	 *            - value of the item
 	 * @param usesLeft
+	 *            - number of remaining uses
 	 */
 	public OneUseItem(String name, String flavor, int durability, int value, int usesLeft) {
 		super.name = name;
@@ -48,9 +53,11 @@ public class OneUseItem extends Item {
 		return usesLeft;
 	}
 	
+	
 	public ItemType getType() {
 		return ItemType.ONE_USE_ITEM;
 	}
+	
 	
 	public OneUseItem clone() {
 		return new OneUseItem(name, flavorText, durability, value, usesLeft);

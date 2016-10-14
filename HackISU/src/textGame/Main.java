@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import items.*;
 
 /**
- * @author Brandon Elizondo, Colt Rogness
+ * @author Brandon Elizondo, edited Colt Rogness
  */
 public class Main {
 	
@@ -66,7 +66,7 @@ public class Main {
 	
 	
 	/**
-	 * updates the player, weapons, armor, and monsters display
+	 * updates the player, weapons, armor, monsters, dropped items, and player's pouch displays
 	 */
 	private static void updateInfo() {
 		test.playerInfo.setText("Agility: " + player.getAgility() + "\nStrength: " + player.getStrength() + "\nDefence: " + player.getDefense() + "\nSpeed: " + player.getSpeed() + "\nHP: " + player.getCurrentHitPoints() + "\nWallet: $" + player.getMoney());
@@ -210,7 +210,16 @@ public class Main {
 	private static void equip(String command) {
 		for (int i = 0; i < player.getPouch().size(); i++) {
 			if (player.getPouch().get(i).getName().trim().equalsIgnoreCase(command)) {
-				player.equip(i);
+				try {
+					player.equip(i);
+				}
+				catch (IllegalArgumentException e) {
+					writeToMain(e.getMessage());
+				}
+				catch (Exception e) {
+					writeToMain(e.getMessage());
+				}
+				break;
 			}
 		}
 		
@@ -249,8 +258,9 @@ public class Main {
 		}
 		
 		if (!monsters.get(0).isAlive()) {
-			ArrayList<Item> add = monsters.get(0).getPouch();
-			map.grid[locationX][locationY].addItems(add);
+			ArrayList<Item> items = monsters.get(0).getPouch();
+			map.grid[locationX][locationY].addItems(items);
+			player.addMoney(monsters.get(0).getMoney());
 			writeToMain("You killed a " + monsters.get(0).getTitle() + "!");
 			monsters.remove(0);
 		}

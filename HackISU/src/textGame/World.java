@@ -10,7 +10,7 @@ import textGame.Monster;
 import items.*;
 
 /**
- * @author Mitchell Bennett, Colt Rogness
+ * @author Mitchell Bennett, edited by Colt Rogness
  */
 public class World {
 	
@@ -66,6 +66,9 @@ public class World {
 	 */
 	public World(String inputFileName) throws FileNotFoundException {
 		File file = new File(inputFileName);
+		if (!file.exists()) {
+			throw new FileNotFoundException("The world constructor file was not found.");
+		}
 		Scanner scan = new Scanner(file);
 		
 		String terrain; // terrain the cell will be set to
@@ -80,13 +83,21 @@ public class World {
 		grid = new Cell[width][length];
 		startX = scan.nextInt();
 		startY = scan.nextInt();
+		if (startX > width || startX < 0 || startY > length || startY < 0) {
+			scan.close();
+			throw new IllegalArgumentException("startX or startY was outside the range from (0, 0) to (width, length)");
+		}
 		readWeaponsFromFile();
 		readArmorFromFile();
 		readMonstersFromFile();
 		
 		// run through file to create world
-		for (int i = 0; i < 3 && scan.hasNext(); i++) {
-			for (int j = 0; j < 3 && scan.hasNext(); j++) {
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (!scan.hasNext()) {
+					scan.close();
+					throw new IllegalArgumentException("Not enough cells to fill the map");
+				}
 				terrain = scan.next();
 				next = scan.next();
 				flavor = "";
@@ -115,6 +126,9 @@ public class World {
 	 */
 	private void readArmorFromFile() throws FileNotFoundException {
 		File file = new File("AllArmor.txt");
+		if (!file.exists()) {
+			throw new FileNotFoundException("The armor file was not found.");
+		}
 		Scanner scan = new Scanner(file);
 		allArmor = new ArrayList<Armor>();
 		while (scan.hasNext()) {
@@ -149,6 +163,9 @@ public class World {
 	 */
 	private void readMonstersFromFile() throws FileNotFoundException {
 		File file = new File("Monsters.txt");
+		if (!file.exists()) {
+			throw new FileNotFoundException("The monster file was not found.");
+		}
 		Scanner scan = new Scanner(file);
 		allMonsters = new ArrayList<Monster>();
 		while (scan.hasNext()) {
@@ -172,6 +189,9 @@ public class World {
 	 */
 	private void readWeaponsFromFile() throws FileNotFoundException {
 		File file = new File("Melee_Weapons.txt");
+		if (!file.exists()) {
+			throw new FileNotFoundException("The weapon file was not found.");
+		}
 		Scanner scan = new Scanner(file);
 		allMeleeWeapons = new ArrayList<Melee>();
 		while (scan.hasNext()) {

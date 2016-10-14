@@ -1,9 +1,7 @@
 package items;
 
 /**
- * 
  * @author Colt Rogness
- *
  */
 public abstract class Weapon extends Item {
 	
@@ -12,16 +10,17 @@ public abstract class Weapon extends Item {
 	 */
 	protected int damage;
 	
+	
 	/**
-	 * 
 	 * @return - the weapons damage
 	 */
 	public int getDamage() {
 		return damage;
 	}
 	
-	public abstract ItemType getType();
+	
 	public abstract Weapon clone();
+	
 	
 	@Override
 	public String toString() {

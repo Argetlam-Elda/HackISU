@@ -6,9 +6,7 @@ import java.util.Random;
 import items.*;
 
 /**
- * 
  * @author Colt Rogness
- *
  */
 public class Monster extends Characters {
 	
@@ -17,12 +15,18 @@ public class Monster extends Characters {
 	 */
 	protected int damage;
 	
+	
+	/**
+	 * the world this cell lives in, gives access to armor and weapons in the world
+	 */
 	private World w;
+	
 	
 	/**
 	 * the maonster's challenge rating
 	 */
 	protected int challengeRating;
+	
 	
 	/**
 	 * constructs a weak-ass (dead) monster
@@ -37,6 +41,7 @@ public class Monster extends Characters {
 		maxHitPoints = 0;
 		challengeRating = 0;
 	}
+	
 	
 	/**
 	 * constructs a new monster with the given stats
@@ -64,17 +69,21 @@ public class Monster extends Characters {
 		super.agility = agility;
 		super.defense = defense;
 		super.speed = speed;
-		super.money = damage + defense;
 		super.maxHitPoints = 5;
-		challengeRating = (damage + defense + (maxHP) / 5) / 3;
+		challengeRating = (damage + defense + (maxHP / 5)) / 3;
+		super.money = challengeRating * 3;
 		currentHitPoints = maxHitPoints;
 		fillWeaponsWithUnequipped();
 		fillArmorWithUnequipped();
 		pouch = new ArrayList<Item>();
-		randomItems();
+		randomItem();
 	}
 	
-	private void randomItems() {
+	
+	/**
+	 * Adds a random item to the monster's inventory from the armor, melee, or ranged ArrayLists
+	 */
+	private void randomItem() {
 		Random rand = new Random();
 		if (rand.nextBoolean()) {
 			int temp = rand.nextInt(7);
@@ -105,25 +114,23 @@ public class Monster extends Characters {
 		}
 	}
 	
+	
 	/**
-	 * 
 	 * @return - the monster's damage
 	 */
 	public int getDamage() {
 		return damage;
 	}
 	
+	
 	/**
-	 * 
 	 * @return - the monsters challenge rating
 	 */
 	public int getChallangeRating() {
 		return challengeRating;
 	}
 	
-	/**
-	 * clones this monster
-	 */
+	
 	public Monster clone() {
 		return new Monster(w, title, damage, strength, agility, defense, speed, maxHitPoints);
 	}

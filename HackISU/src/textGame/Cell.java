@@ -6,9 +6,7 @@ import java.util.Random;
 import items.*;
 
 /**
- * 
  * @author Mitchell Bennett, Colt Rogness
- *
  */
 public class Cell {
 	
@@ -17,44 +15,51 @@ public class Cell {
 	 */
 	private World world;
 	
+	
 	/**
 	 * terrain the cell will be set to
 	 */
 	private String terrain;
+	
 	
 	/**
 	 * flavortext for the cell
 	 */
 	private String flavor;
 	
+	
 	/**
 	 * min combat rating of enemies
 	 */
 	private int combatMin;
+	
 	
 	/**
 	 * max combat rating
 	 */
 	private int combatMax;
 	
+	
 	/**
 	 * its in the name
 	 */
 	private int maxEnemies;
 	
+	
 	/**
-	 * ArrayList of monsters, holds the enemies in this cell so they don't
-	 * spread
+	 * ArrayList of monsters, holds the enemies in this cell so they don't spread
 	 */
 	private ArrayList<Monster> enemies;
+	
 	
 	/**
 	 * items dropped by monsters/spawned into the world
 	 */
 	public ArrayList<Item> items;
 	
+	
 	/**
-	 * creates a cell object
+	 * creates a cell object with the given values
 	 * 
 	 * @param t
 	 *            - terrain
@@ -81,6 +86,7 @@ public class Cell {
 		resetEnemies();
 	}
 	
+	
 	/**
 	 * @return - flavor text
 	 */
@@ -88,15 +94,18 @@ public class Cell {
 		return flavor;
 	}
 	
+	
 	/**
-	 * 
 	 * @return - the terrain
 	 */
 	public String getTerrain() {
 		return terrain;
 	}
 	
+	
 	/**
+	 * get the min and max levels of monsters in the cell
+	 * 
 	 * @return - array [min, max] (levels)
 	 */
 	public int[] getLevels() {
@@ -106,24 +115,27 @@ public class Cell {
 		return minMax;
 	}
 	
+	
 	/**
-	 * 
-	 * @return - Returns max amount of enemies allowed in the square.
+	 * @return - the max number of enemies allowed in the cell.
 	 */
 	public int getMaxEnemies() {
 		return maxEnemies;
 	}
 	
+	
 	/**
+	 * get a list of enemies in the cell
 	 * 
-	 * @return - an array of the enemies in this cell
+	 * @return - an ArrayList of the enemies in this cell
 	 */
 	public ArrayList<Monster> getEnemies() {
 		return enemies;
 	}
 	
+	
 	/**
-	 * refills the enemy array after they have been killed
+	 * resets the enemy array
 	 */
 	public void resetEnemies() {
 		Random rand = new Random();
@@ -133,8 +145,7 @@ public class Cell {
 		for (int i = 0; i < numEnemies; i++) { // spawns correct amount
 			skip = rand.nextInt(60);
 			for (int j = 0; j < world.allMonsters.size(); j++) {
-				if (world.allMonsters.get(j).getChallangeRating() >= combatMin
-						&& world.allMonsters.get(j).getChallangeRating() <= combatMax) {
+				if (world.allMonsters.get(j).getChallangeRating() >= combatMin && world.allMonsters.get(j).getChallangeRating() <= combatMax) {
 					if (skip == 0) {
 						enemies.add(world.allMonsters.get(j).clone());
 						break;
@@ -150,15 +161,20 @@ public class Cell {
 		}
 	}
 	
+	
 	/**
+	 * adds the given items to the cell, to hold until the player picks them up
 	 * 
-	 * @param add - ArrayList of items to be added
+	 * @param add
+	 *            - ArrayList of items to be added
 	 */
 	public void addItems(ArrayList<Item> add) {
 		items.addAll(add);
 	}
 	
+	
 	/**
+	 * get all the items dropped in the cell
 	 * 
 	 * @return - all items in the cell
 	 */

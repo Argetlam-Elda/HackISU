@@ -16,88 +16,106 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 /**
- * 
  * @author Brandon Elizondo, Colt Rogness
- *
  */
-@SuppressWarnings("serial")
 public class TestFrame extends JFrame implements KeyListener {
+	
+	/**
+	 * serial id thing. idk, it kept yelling at me so i made one
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	
 	/**
 	 * the giant box that makes the window a different color
 	 */
 	private JPanel contentPane;
 	
+	
 	/**
 	 * Main text screen, the huge one you retard
 	 */
 	public JTextArea console;
+	
 	
 	/**
 	 * Top of top info screen
 	 */
 	public JTextField playerPane;
 	
+	
 	/**
 	 * Top of middle info screen
 	 */
 	public JTextField weaponPane;
+	
 	
 	/**
 	 * User input bar
 	 */
 	public JTextField userInput;
 	
+	
 	/**
 	 * Bottom of top info screen
 	 */
 	public JTextArea playerInfo;
+	
 	
 	/**
 	 * Bottom of middle info screen
 	 */
 	public JTextArea weaponInfo;
 	
+	
 	/**
 	 * Top of bottom info screen
 	 */
 	public JTextField MonsterPane;
+	
 	
 	/**
 	 * Bottom of bottom info screen
 	 */
 	public JTextArea monsterInfo;
 	
+	
 	/**
 	 * shows contents of the pouch
 	 */
 	public JTextArea pouchInfo;
 	
+	
 	/**
-	 * 
+	 * shows all items dropped in the area
 	 */
 	public JTextArea droppedItemDisplay;
+	
 	
 	/**
 	 * stores last command for convenience
 	 */
 	public String previousCommand = "";
 	
+	
 	/**
 	 * for arrow key convenience
 	 */
 	public String currentCommand = "";
+	
 	
 	/**
 	 * for arrow key convenience
 	 */
 	public boolean upHasRun;
 	
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			
 			public void run() {
 				try {
 					TestFrame frame = new TestFrame();
@@ -109,6 +127,7 @@ public class TestFrame extends JFrame implements KeyListener {
 			}
 		});
 	}
+	
 	
 	/**
 	 * Create the frame.
@@ -209,6 +228,7 @@ public class TestFrame extends JFrame implements KeyListener {
 		userInput.addKeyListener(this);
 	}
 	
+	
 	/**
 	 * this runs every time a key is pressed
 	 */
@@ -241,6 +261,7 @@ public class TestFrame extends JFrame implements KeyListener {
 		}
 	}
 	
+	
 	/**
 	 * this runs every time a key is released
 	 */
@@ -248,6 +269,7 @@ public class TestFrame extends JFrame implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		
 	}
+	
 	
 	/**
 	 * this runs every time a key is typed
@@ -257,10 +279,11 @@ public class TestFrame extends JFrame implements KeyListener {
 		
 	}
 	
+	
 	/**
 	 * trims the text printed to the console once it gets to long
 	 */
-	public void mainTextCropper() {
+	private void mainTextCropper() {
 		int lineCount = console.getLineCount();
 		
 		if (lineCount >= 28) {
@@ -280,13 +303,13 @@ public class TestFrame extends JFrame implements KeyListener {
 		}
 	}
 	
+	
 	/**
-	 * trims the whitespace of the input string and prints your command to the
-	 * console, then calls the game's command method
+	 * trims the whitespace of the input string and prints your command to the console, then calls the game's command method
 	 * 
 	 * @throws FileNotFoundException
 	 */
-	public void textControl() throws FileNotFoundException {
+	private void textControl() throws FileNotFoundException {
 		String enteredText;
 		enteredText = userInput.getText().trim();
 		
@@ -300,24 +323,4 @@ public class TestFrame extends JFrame implements KeyListener {
 		scan.close();
 	}
 	
-	/**
-	 * this method runs when you hit the up arrow so you can reuse your last
-	 * command
-	 */
-	public void getPreviousCommand() {
-		Scanner textDelete = new Scanner(console.getText());
-		textDelete.useDelimiter("\\s*>>\\s*");
-		
-		String temp = "";
-		
-		for (int i = 0; i < console.getLineCount() - 2; i++) {
-			textDelete.next();
-			
-		}
-		while (textDelete.hasNext()) {
-			temp = textDelete.next();
-		}
-		previousCommand = temp;
-		textDelete.close();
-	}
 }

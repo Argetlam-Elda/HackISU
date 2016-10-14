@@ -1,11 +1,9 @@
 package items;
 
 /**
- * 
  * @author Colt Rogness
- *
  */
-public class Boots extends Armor{
+public class Boots extends Armor {
 	
 	/**
 	 * constructs an empty boot
@@ -18,29 +16,31 @@ public class Boots extends Armor{
 		super.challengeRating = defense;
 	}
 	
+	
 	/**
 	 * constructs a boot with the given stats
-	 * @param durability - how many hits it can take
-	 * @param defense - how much damage it removes
+	 * 
+	 * @param durability
+	 *            - how many hits it can take
+	 * @param defense
+	 *            - how much damage it removes
 	 */
 	public Boots(String name, int durability, int defense) {
 		super.durability = durability;
 		super.defense = defense;
 		super.name = name;
-		value = durability/10 + defense*10;
+		value = durability / 10 + defense * 10;
 		super.challengeRating = defense;
 	}
-
+	
+	
 	@Override
 	public Boots clone() {
 		return new Boots(name, durability, defense);
 	}
 	
-	/**
-	 * 
-	 * @return - the type of armor this is
-	 */
-	public ItemType getType(){
+	
+	public ItemType getType() {
 		return ItemType.BOOTS;
 	}
 }

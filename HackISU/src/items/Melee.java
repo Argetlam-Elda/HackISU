@@ -1,11 +1,9 @@
 package items;
 
 /**
- * 
  * @author Colt Rogness
- *
  */
-public class Melee extends Weapon{
+public class Melee extends Weapon {
 	
 	/**
 	 * constructs a new weapon
@@ -18,13 +16,20 @@ public class Melee extends Weapon{
 		super.challengeRating = -1;
 	}
 	
+	
 	/**
 	 * constructs a weapon with given values
-	 * @param name - name of the weapon
-	 * @param damage - amount of damage it does
-	 * @param durability - number of hits it can take
-	 * @param challengeRating - the challenge rating of the weapon
-	 * @param flavorText - pretty self explanatory
+	 * 
+	 * @param name
+	 *            - name of the weapon
+	 * @param damage
+	 *            - amount of damage it does
+	 * @param durability
+	 *            - number of hits it can take
+	 * @param challengeRating
+	 *            - the challenge rating of the weapon
+	 * @param flavorText
+	 *            - pretty self explanatory
 	 */
 	public Melee(String name, int damage, String flavorText) {
 		super.name = name;
@@ -35,14 +40,15 @@ public class Melee extends Weapon{
 		super.value = damage;
 	}
 	
+	
 	/**
-	 * 
 	 * @return - the weapons type, MELEE or RANGED. currently always returns MELEE
 	 */
 	public ItemType getType() {
 		return ItemType.MELEE;
 	}
-
+	
+	
 	@Override
 	public Weapon clone() {
 		return new Melee(name, damage, flavorText);
