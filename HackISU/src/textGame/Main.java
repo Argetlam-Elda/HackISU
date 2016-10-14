@@ -13,7 +13,7 @@ public class Main {
 	/**
 	 * tells whether the world has been initialized yet
 	 */
-	private static boolean isInit;
+	private static boolean playerIsAlive;
 	
 	
 	/**
@@ -60,7 +60,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		test.setVisible(true);
-		isInit = false;
+		playerIsAlive = false;
 		writeToMain("What is your name?");
 	}
 	
@@ -119,7 +119,7 @@ public class Main {
 	 * @throws FileNotFoundException
 	 */
 	private static void firstRun(String command) throws FileNotFoundException {
-		isInit = true;
+		playerIsAlive = true;
 		player = new PlayerCharacter(command);
 		map = new World("world1-1.txt");
 		locationX = map.getStartX();
@@ -134,7 +134,7 @@ public class Main {
 		player.equip(map.getMeleeWeapon(1));
 		player.equip(map.getArmor(1, ItemType.CHESTPIECE));
 		
-		writeToMain("Welcome " + player.getName() + ". Say LOOK to look around, LOOT ITEMNAME to pick up any items you see laying around, OPEN BAG to see what items you have, and EQUIP ITEMNAME to equip. To move around the habitat, use the directional commands NORTH, SOUTH, EAST, and WEST. In the column to the right, the top box contains your stats, the second your weapons and armor, and the third contasins the stats for any monsters in the area.");
+		writeToMain("Welcome " + player.getName() + ". Say LOOK to look around, LOOT ITEMNAME to pick up any items you see laying around, and EQUIP ITEMNAME to equip. To move around the habitat, use the directional commands NORTH, SOUTH, EAST, and WEST. In the column to the right, the top box contains your stats, the second your weapons and armor, and the third stats for any monsters in the area.");
 		writeToMain(map.grid[locationX][locationY].getFlavor());
 		
 		if (monsters != null && !monsters.isEmpty()) {
@@ -152,7 +152,7 @@ public class Main {
 	 *             - because files
 	 */
 	public static void gameCommand(String command) throws FileNotFoundException {
-		if (isInit) {
+		if (playerIsAlive) {
 			if (command.equals("KILL")) {
 				System.exit(0);
 			}
@@ -174,8 +174,8 @@ public class Main {
 			else if (command.equalsIgnoreCase("LOOK")) {
 				writeToMain(map.grid[locationX][locationY].getFlavor());
 			}
-			else if (command.equalsIgnoreCase("OPEN BAG")) {
-				writeToMain(player.getPouch().toString());
+			else if (command.equals("soft reset")) {
+				
 			}
 			else if (command.equals("rAre dR0p")) {
 				player.equip(map.getRangedWeapon("furry's gaze"));
@@ -202,24 +202,27 @@ public class Main {
 	}
 	
 	
+	/**
+	 * runs through the player's pouch and equips the item with the given name
+	 * 
+	 * @param command
+	 */
 	private static void equip(String command) {
 		for (int i = 0; i < player.getPouch().size(); i++) {
 			if (player.getPouch().get(i).getName().trim().equalsIgnoreCase(command)) {
-				String temp = player.getPouch().get(i).getClass().getName();
-				if (temp.matches("(?i)ITEMS.MELEE|ITEMS.RANGED")) {
-					player.equip(i);
-					// player.pouch.remove(i);
-				}
-				else if (temp.matches("(?i)ITEMS.HELM|ITEMS.CHESTPIECE|ITEMS.GLOVES|ITEMS.LEGGINGS|ITEMS.BOOTS")) {
-					player.equip(i);
-					// player.pouch.remove(i);
-				}
+				player.equip(i);
 			}
 		}
 		
 	}
 	
 	
+	/**
+	 * runs through all items in the cell and gives the player the first one with the given name
+	 * 
+	 * @param command
+	 *            - the given name
+	 */
 	private static void loot(String command) {
 		for (int i = 0; i < map.grid[locationX][locationY].items.size(); i++) {
 			if (map.grid[locationX][locationY].items.get(i).getName().trim().equalsIgnoreCase(command)) {
@@ -258,6 +261,10 @@ public class Main {
 		}
 		else {
 			writeToMain("All monsters in the area are dead.");
+		}
+		if (!player.isAlive()) {
+			playerIsAlive = false;
+			writeToMain("Oh no! You died. To start again, enter your name:");
 		}
 	}
 	
