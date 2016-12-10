@@ -15,7 +15,7 @@ import items.*;
 public class World {
 	
 	/**
-	 * grid of map cells
+	 * grid of map cells TODO - make this 2D array a single cell that has north south east and west values
 	 */
 	public Cell[][] grid;
 	
@@ -170,13 +170,10 @@ public class World {
 		allMonsters = new ArrayList<Monster>();
 		while (scan.hasNext()) {
 			int damage = scan.nextInt();
-			int strength = scan.nextInt();
-			int agility = scan.nextInt();
 			int defence = scan.nextInt();
-			int speed = scan.nextInt();
 			int maxHP = scan.nextInt();
 			String name = scan.nextLine().trim();
-			allMonsters.add(new Monster(this, name, damage, strength, agility, defence, speed, maxHP));
+			allMonsters.add(new Monster(this, name, damage, defence, maxHP));
 		}
 		scan.close();
 	}
@@ -216,7 +213,7 @@ public class World {
 	
 	
 	/**
-	 * @return - starting x coord
+	 * @return - starting x coordinate
 	 */
 	public int getStartX() {
 		return startX;
@@ -224,7 +221,7 @@ public class World {
 	
 	
 	/**
-	 * @return - starting y coord
+	 * @return - starting y coordinate
 	 */
 	public int getStartY() {
 		return startY;

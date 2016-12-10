@@ -69,7 +69,7 @@ public class Main {
 	 * updates the player, weapons, armor, monsters, dropped items, and player's pouch displays
 	 */
 	private static void updateInfo() {
-		test.playerInfo.setText("Agility: " + player.getAgility() + "\nStrength: " + player.getStrength() + "\nDefence: " + player.getDefense() + "\nSpeed: " + player.getSpeed() + "\nHP: " + player.getCurrentHitPoints() + "\nWallet: $" + player.getMoney());
+		test.playerInfo.setText("Defence: " + player.getDefense() + "\nHP: " + player.getCurrentHitPoints() + "\nWallet: $" + player.getMoney());
 		test.monsterInfo.setText("");
 		if (monsters != null || !monsters.isEmpty()) {
 			for (int i = 0; i < monsters.size(); i++) {
@@ -198,7 +198,6 @@ public class Main {
 			firstRun(command);
 		}
 		updateInfo();
-		
 	}
 	
 	

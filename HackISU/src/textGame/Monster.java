@@ -33,10 +33,7 @@ public class Monster extends Characters {
 	 */
 	public Monster() {
 		damage = 0;
-		strength = 0;
-		agility = 0;
 		defense = 0;
-		speed = 0;
 		money = 0;
 		maxHitPoints = 0;
 		challengeRating = 0;
@@ -61,20 +58,15 @@ public class Monster extends Characters {
 	 * @param maxHP
 	 *            - the monsters max health
 	 */
-	public Monster(World w, String name, int damage, int strength, int agility, int defense, int speed, int maxHP) {
+	public Monster(World w, String name, int damage, int defense, int maxHP) {
 		this.w = w;
-		title = name;
+		super.name = name;
 		this.damage = damage;
-		super.strength = strength;
-		super.agility = agility;
 		super.defense = defense;
-		super.speed = speed;
 		super.maxHitPoints = 5;
 		challengeRating = (damage + defense + (maxHP / 5)) / 3;
 		super.money = challengeRating * 3;
 		currentHitPoints = maxHitPoints;
-		fillWeaponsWithUnequipped();
-		fillArmorWithUnequipped();
 		pouch = new ArrayList<Item>();
 		randomItem();
 	}
@@ -132,7 +124,7 @@ public class Monster extends Characters {
 	
 	
 	public Monster clone() {
-		return new Monster(w, title, damage, strength, agility, defense, speed, maxHitPoints);
+		return new Monster(w, name, damage, defense, maxHitPoints);
 	}
 	
 }

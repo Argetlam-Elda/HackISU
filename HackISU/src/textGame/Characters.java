@@ -9,27 +9,9 @@ import items.*;
 public abstract class Characters {
 	
 	/**
-	 * the characer's strength
-	 */
-	protected int strength;
-	
-	
-	/**
-	 * the characer's agility
-	 */
-	protected int agility;
-	
-	
-	/**
-	 * the characer's
+	 * the characer's defense
 	 */
 	protected int defense;
-	
-	
-	/**
-	 * the characer's
-	 */
-	protected int speed;
 	
 	
 	/**
@@ -39,7 +21,7 @@ public abstract class Characters {
 	
 	
 	/**
-	 * the characer's added HP for certain items
+	 * TODO - the characer's bonus hit points, not yet implemented
 	 */
 	protected int tempHitPoints;
 	
@@ -51,51 +33,9 @@ public abstract class Characters {
 	
 	
 	/**
-	 * the characer's helmet
-	 */
-	protected Armor helm;
-	
-	
-	/**
-	 * the characer's chest piece
-	 */
-	protected Armor chestPiece;
-	
-	
-	/**
-	 * the characer's boots
-	 */
-	protected Armor boots;
-	
-	
-	/**
-	 * the characer's leggings
-	 */
-	protected Armor leggings;
-	
-	
-	/**
-	 * the characer's gloves
-	 */
-	protected Armor gloves;
-	
-	
-	/**
 	 * the characer's pouch, holds their items and unequipped armor and weapons
 	 */
 	protected ArrayList<Item> pouch;
-	
-	
-	/**
-	 * the characer's equipped melee weapon
-	 */
-	protected Weapon meleeWeapon;
-	
-	
-	/**
-	 * the characer's equipped ranged weapon
-	 */
-	protected Weapon rangedWeapon;
 	
 	
 	/**
@@ -105,33 +45,9 @@ public abstract class Characters {
 	
 	
 	/**
-	 * the characer's title (Player Charater's name)
+	 * the characer's name or species for mobs
 	 */
-	protected String title;
-	
-	
-	/**
-	 * @return - strength
-	 */
-	public int getStrength() {
-		return strength;
-	}
-	
-	
-	/**
-	 * @return - agility
-	 */
-	public int getAgility() {
-		return agility;
-	}
-	
-	
-	/**
-	 * @return - speed
-	 */
-	public int getSpeed() {
-		return speed;
-	}
+	protected String name;
 	
 	
 	/**
@@ -195,12 +111,7 @@ public abstract class Characters {
 	 * @return - the characters base defense plus armor's defense
 	 */
 	public int getDefense() {
-		int AC = defense;
-		Armor[] equipped = getEquippedArmor();
-		for (int i = 0; i < equipped.length; i++) {
-			AC += equipped[i].getDefense();
-		}
-		return AC;
+		return defense;
 	}
 	
 	
@@ -218,7 +129,7 @@ public abstract class Characters {
 	 * @return - the title of the character
 	 */
 	public String getTitle() {
-		return title;
+		return name;
 	}
 	
 	
@@ -230,57 +141,6 @@ public abstract class Characters {
 	 */
 	public void takeDamage(int hit) {
 		currentHitPoints -= Math.max(0, hit - getDefense());
-	}
-	
-	
-	/**
-	 * @return - array of the characters equipped armor
-	 */
-	public Armor[] getEquippedArmor() {
-		Armor[] equipped = new Armor[5];
-		equipped[0] = helm;
-		equipped[1] = chestPiece;
-		equipped[2] = gloves;
-		equipped[3] = leggings;
-		equipped[4] = boots;
-		return equipped;
-	}
-	
-	
-	/**
-	 * @return - the chatacter's equipped melee weapon
-	 */
-	public Weapon getMeleeWeapon() {
-		return meleeWeapon;
-	}
-	
-	
-	/**
-	 * @return - the character's ranged weapon
-	 */
-	public Weapon getRangedWeapon() {
-		return rangedWeapon;
-	}
-	
-	
-	/**
-	 * fill armor slots with unequipped item holder
-	 */
-	protected void fillArmorWithUnequipped() {
-		helm = new Helm();
-		chestPiece = new Chestpiece();
-		gloves = new Gloves();
-		leggings = new Leggings();
-		boots = new Boots();
-	}
-	
-	
-	/**
-	 * fill weapon slots with unequipped item holder
-	 */
-	protected void fillWeaponsWithUnequipped() {
-		rangedWeapon = new Ranged();
-		meleeWeapon = new Melee();
 	}
 	
 	

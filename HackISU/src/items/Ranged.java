@@ -51,7 +51,7 @@ public class Ranged extends Weapon {
 	
 	@Override
 	public Weapon clone() {
-		return new Ranged(name, durability, flavorText);
+		return new Ranged(name, damage, flavorText);
 	}
 	
 }

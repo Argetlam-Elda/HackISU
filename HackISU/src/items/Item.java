@@ -9,7 +9,7 @@ public abstract class Item {
 	
 	
 	/**
-	 * how much durability the item has
+	 * TODO - how close the item is to breaking, not implemented
 	 */
 	protected int durability;
 	
