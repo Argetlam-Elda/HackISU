@@ -2,206 +2,371 @@ package textGame;
 
 import java.util.ArrayList;
 
-import armor.*;
-import oneUseItems.*;
-import weapons.*;
+import items.*;
 
+/**
+ * @author Colt Rogness
+ */
 public class PlayerCharacter extends People {
-
-	private Armor wearableItem1; // for rings and such
-	private Armor wearableItem2; // for rings and such
-	private Armor wearableItem3; // for rings and such
-	private Armor wearableItem4; // fir rings and such
-
+	
 	/**
-	 * constructs a new PC, with default stats and hp, no armor and a foam sword
-	 * @param name - Player charater's name
+	 * the characer's helmet
+	 */
+	protected Armor helm;
+	
+	
+	/**
+	 * the characer's chest piece
+	 */
+	protected Armor chestPiece;
+	
+	
+	/**
+	 * the characer's boots
+	 */
+	protected Armor boots;
+	
+	
+	/**
+	 * the characer's leggings
+	 */
+	protected Armor leggings;
+	
+	
+	/**
+	 * the characer's gloves
+	 */
+	protected Armor gloves;
+	
+	
+	/**
+	 * the characer's equipped melee weapon
+	 */
+	protected Weapon meleeWeapon;
+	
+	
+	/**
+	 * the characer's equipped ranged weapon
+	 */
+	protected Weapon rangedWeapon;
+	
+	
+	/**
+	 * constructs a new PC, with default stats and hit points, no armor and a foam sword
+	 * 
+	 * @param name
+	 *            - Player charater's name
 	 */
 	public PlayerCharacter(String name) {
-		title = name;
-
-		strength = 15;
-		agility = 15;
-		defense = 15;
-		speed = 12;
-
-		maxHitPoints = 12;
+		super.name = name;
+		defense = 0;
+		maxHitPoints = 15;
 		tempHitPoints = 0;
-		currentHitPoints = maxHitPoints + tempHitPoints;
-
+		currentHitPoints = maxHitPoints;
+		
 		pouch = new ArrayList<Item>();
-
+		
 		// equipped items
 		fillArmorWithUnequipped();
 		fillWeaponsWithUnequipped();
-		wearableItem1 = new UnequippedA();
-		wearableItem2 = new UnequippedA();
-		wearableItem3 = new UnequippedA();
-		wearableItem4 = new UnequippedA();
 	}
 	
+	
 	/**
-	 * @return  - array of equipped armor and rings
+	 * equips the given weapon
+	 * 
+	 * @param equip
+	 *            - piece of armor to be equipped
 	 */
-	@Override
+	public void equip(Weapon equip) {
+		if (equip.getType() == ItemType.MELEE) {
+			if (!meleeWeapon.getName().equals("")) {
+				pouch.add(meleeWeapon);
+			}
+			meleeWeapon = equip.clone();
+		}
+		else if (equip.getType() == ItemType.RANGED) {
+			if (!rangedWeapon.getName().equals("")) {
+				pouch.add(rangedWeapon);
+			}
+			rangedWeapon = equip.clone();
+		}
+	}
+	
+	
+	/**
+	 * equip the given piece of armor
+	 * 
+	 * @param equip
+	 *            - piece of armor to be equipped
+	 */
+	public void equip(Armor equip) {
+		if (equip.getType() == ItemType.BOOTS) {
+			if (!boots.getName().equals("")) {
+				pouch.add(boots);
+			}
+			boots = equip;
+		}
+		else if (equip.getType() == ItemType.CHESTPIECE) {
+			if (!chestPiece.getName().equals("")) {
+				pouch.add(chestPiece);
+			}
+			chestPiece = equip;
+		}
+		else if (equip.getType() == ItemType.GLOVES) {
+			if (!gloves.getName().equals("")) {
+				pouch.add(gloves);
+			}
+			gloves = equip;
+		}
+		else if (equip.getType() == ItemType.HELM) {
+			if (!helm.getName().equals("")) {
+				pouch.add(helm);
+			}
+			helm = equip;
+		}
+		else if (equip.getType() == ItemType.LEGGINGS) {
+			if (!leggings.getName().equals("")) {
+				pouch.add(leggings);
+			}
+			leggings = equip;
+		}
+	}
+	
+	
+	/**
+	 * equip the item at location i in the player's pouch
+	 * 
+	 * @param i
+	 *            - location of the item to equip
+	 * @throws Exception
+	 */
+	public void equip(int i) throws Exception {
+		Item temp = null;
+		if (pouch.size() > i) {
+			if (pouch.get(i).getType() == ItemType.MELEE) {
+				temp = meleeWeapon.clone();
+				meleeWeapon = ((Weapon) pouch.get(i)).clone();
+			}
+			else if (pouch.get(i).getType() == ItemType.RANGED) {
+				temp = rangedWeapon.clone();
+				rangedWeapon = ((Weapon) pouch.get(i)).clone();
+			}
+			else if (pouch.get(i).getType() == ItemType.BOOTS) {
+				temp = (Armor) boots.clone();
+				boots = (Armor) pouch.get(i).clone();
+			}
+			else if (pouch.get(i).getType() == ItemType.CHESTPIECE) {
+				temp = (Armor) chestPiece.clone();
+				chestPiece = (Armor) pouch.get(i).clone();
+			}
+			else if (pouch.get(i).getType() == ItemType.GLOVES) {
+				temp = (Armor) gloves.clone();
+				gloves = (Armor) pouch.get(i).clone();
+			}
+			else if (pouch.get(i).getType() == ItemType.HELM) {
+				temp = (Armor) helm.clone();
+				helm = (Armor) pouch.get(i).clone();
+			}
+			else if (pouch.get(i).getType() == ItemType.LEGGINGS) {
+				temp = (Armor) leggings.clone();
+				leggings = (Armor) pouch.get(i).clone();
+			}
+			else {
+				throw new IllegalArgumentException("Cannot equip this item.");
+			}
+			if (temp != null) {
+				pouch.remove(i);
+				if (!temp.getName().equalsIgnoreCase("")) {
+					pouch.add(temp);
+				}
+			}
+		}
+		else {
+			throw new Exception("There is no item at location i in the player's pouch");
+		}
+	}
+	
+	
+	/**
+	 * @param unequip
+	 *            - weapon to be unequipped
+	 */
+	public void unequipWeapon(Weapon unequip) {
+		if (unequip.getType() == ItemType.MELEE) {
+			if (!meleeWeapon.getName().equals("")) {
+				pouch.add(meleeWeapon.clone());
+			}
+			meleeWeapon = new Melee();
+		}
+		else if (unequip.getType() == ItemType.RANGED) {
+			if (!rangedWeapon.getName().equals("")) {
+				pouch.add(rangedWeapon.clone());
+			}
+			rangedWeapon = new Ranged();
+		}
+	}
+	
+	
+	/**
+	 * unequips the given piece of armor and adds it to the pouch
+	 * 
+	 * @param unequip
+	 *            - piece of armor to be unequipped
+	 */
+	public void unEquipArmor(Armor unequip) {
+		if (unequip.getType() == ItemType.BOOTS) {
+			pouch.add(boots.clone());
+			boots = new Boots();
+		}
+		else if (unequip.getType() == ItemType.CHESTPIECE) {
+			pouch.add(chestPiece.clone());
+			chestPiece = new Chestpiece();
+		}
+		else if (unequip.getType() == ItemType.GLOVES) {
+			pouch.add(gloves.clone());
+			gloves = new Gloves();
+		}
+		else if (unequip.getType() == ItemType.HELM) {
+			pouch.add(helm.clone());
+			helm = new Helm();
+		}
+		else if (unequip.getType() == ItemType.LEGGINGS) {
+			pouch.add(leggings.clone());
+			leggings = new Leggings();
+		}
+		
+	}
+	
+	
+	/**
+	 * @param item
+	 *            - item to be dropped
+	 * @return - the item that was dropped, if you had that item. else, drops unequipped placeholder
+	 */
+	public Item dropItem(String name) {
+		for (int i = 0; i < pouch.size(); i++) {
+			if (pouch.get(i).getName().equals(name)) {
+				Item temp = pouch.get(i);
+				pouch.remove(i);
+				return temp;
+			}
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * @param item
+	 *            - item to be dropped
+	 * @return - the item that was dropped, if you had that item. else, drops unequipped placeholder
+	 * @throws Exception
+	 */
+	public Item dropItem(int i) throws Exception {
+		if (pouch.size() > i) {
+			Item temp = pouch.get(i);
+			pouch.remove(i);
+			return temp;
+		}
+		else {
+			throw new Exception("There is no item at given location in the player's pouch");
+		}
+	}
+	
+	
+	/**
+	 * sell the given item if it is in the player's pouch
+	 * 
+	 * @param item
+	 *            - item to be sold
+	 */
+	public void sell(Item item) {
+		for (int i = 0; i < pouch.size(); i++) {
+			if (item.equals(pouch.get(i))) {
+				money += pouch.get(i).getValue();
+				pouch.remove(i);
+			}
+		}
+	}
+	
+	
+	/**
+	 * sell the item at the given index of the player's pouch
+	 * 
+	 * @param i
+	 *            - index of item to be sold
+	 * @throws Exception
+	 */
+	public void sell(int i) throws Exception {
+		if (pouch.size() > i) {
+			money += pouch.get(i).getValue();
+			pouch.remove(i);
+		}
+		else {
+			throw new Exception("There is no item at given location in the player's pouch");
+		}
+	}
+	
+	
+	/**
+	 * @return - array of the characters equipped armor
+	 */
 	public Armor[] getEquippedArmor() {
-		Armor[] equipped = new Armor[9];
+		Armor[] equipped = new Armor[5];
 		equipped[0] = helm;
 		equipped[1] = chestPiece;
 		equipped[2] = gloves;
 		equipped[3] = leggings;
 		equipped[4] = boots;
-		equipped[5] = wearableItem1;
-		equipped[6] = wearableItem2;
-		equipped[7] = wearableItem3;
-		equipped[8] = wearableItem4;
 		return equipped;
 	}
-
-	/**
-	 * 
-	 * @param equip - piece of armor to be equipped
-	 */
-	public void equipWeapon(Weapon equip) {
-		if (equip.getType() == WeaponType.MELEE) {
-			Weapon temp = meleeWeapon;
-			meleeWeapon = equip;
-			equip = temp;
+	
+	
+	@Override
+	public int getDefense() {
+		int AC = defense;
+		Armor[] equipped = getEquippedArmor();
+		for (int i = 0; i < equipped.length; i++) {
+			AC += equipped[i].getDefense();
 		}
-		else if (equip.getType() == WeaponType.MELEE) {
-			Weapon temp = rangedWeapon;
-			rangedWeapon = equip;
-			equip = temp;
-		}
-	}
-
-	/**
-	 * 
-	 * @param unequip - weapon to be unequipped
-	 */
-	public void unequipWeapon(Weapon unequip) {
-		if (unequip.getType() == WeaponType.MELEE) {
-			pouch.add(meleeWeapon);
-			meleeWeapon = new Weapon(); // might destroy weapon because of pointers
-		}
-		else if (unequip.getType() == WeaponType.MELEE) {
-			pouch.add(rangedWeapon);
-			rangedWeapon = new Weapon(); // might destroy weapon because of pointers
-		}
+		return AC;
 	}
 	
+	
 	/**
-	 * 
-	 * @param equip - piece of armor to be equipped
+	 * @return - the chatacter's equipped melee weapon
 	 */
-	public void equipArmor(Armor equip) {
-		if (equip.getType() == ArmorType.BOOTS) {
-			Armor temp = boots;
-			boots = equip;
-			equip = temp;
-		}
-		else if (equip.getType() == ArmorType.CHESTPIECE) {
-			Armor temp = chestPiece;
-			chestPiece = equip;
-			equip = temp;
-		}
-		else if (equip.getType() == ArmorType.GLOVES) {
-			Armor temp = gloves;
-			gloves = equip;
-			equip = temp;
-		}
-		else if (equip.getType() == ArmorType.HELM) {
-			Armor temp = helm;
-			helm = equip;
-			equip = temp;
-		}
-		else if (equip.getType() == ArmorType.LEGGINGS) {
-			Armor temp = leggings;
-			leggings = equip;
-			equip = temp;
-		}
-		else if (equip.getType() == ArmorType.WEARABLEITEM) {
-			if (wearableItem1.getType() == ArmorType.ANY) {
-				Armor temp = wearableItem1;
-				wearableItem1 = equip;
-				equip = temp;
-			}
-			else if (wearableItem2.getType() == ArmorType.ANY) {
-				Armor temp = wearableItem2;
-				wearableItem2 = equip;
-				equip = temp;
-			}
-			else if (wearableItem3.getType() == ArmorType.ANY) {
-				Armor temp = wearableItem3;
-				wearableItem3 = equip;
-				equip = temp;
-			}
-			else if (wearableItem4.getType() == ArmorType.ANY) {
-				Armor temp = wearableItem4;
-				wearableItem4 = equip;
-				equip = temp;
-			}
-		}
+	public Weapon getMeleeWeapon() {
+		return meleeWeapon;
 	}
-
+	
+	
 	/**
-	 * 
-	 * @param unequip - piece of armor to be unequipped
+	 * @return - the character's ranged weapon
 	 */
-	public void unEquipArmor(Armor unequip) {
-		if (unequip.getType() == ArmorType.BOOTS) {
-			pouch.add(boots.clone());
-			boots = new UnequippedA();
-		}
-		else if (unequip.getType() == ArmorType.CHESTPIECE) {
-			pouch.add(chestPiece.clone());
-			chestPiece = new UnequippedA();
-		}
-		else if (unequip.getType() == ArmorType.GLOVES) {
-			pouch.add(gloves.clone());
-			gloves = new UnequippedA();
-		}
-		else if (unequip.getType() == ArmorType.HELM) {
-			pouch.add(helm.clone());
-			helm = new UnequippedA();
-		}
-		else if (unequip.getType() == ArmorType.LEGGINGS) {
-			pouch.add(leggings.clone());
-			leggings = new UnequippedA();
-		}
-		else if (unequip.getType() == ArmorType.WEARABLEITEM) {
-			if (wearableItem1.getType() == ArmorType.ANY) {
-				pouch.add(wearableItem1.clone());
-				wearableItem1 = new UnequippedA();
-			}
-			else if (wearableItem2.getType() == ArmorType.ANY) {
-				pouch.add(wearableItem2.clone());
-				wearableItem2 = new UnequippedA();
-			}
-			else if (wearableItem3.getType() == ArmorType.ANY) {
-				pouch.add(wearableItem3.clone());
-				wearableItem3 = new UnequippedA();
-			}
-			else if (wearableItem4.getType() == ArmorType.ANY) {
-				pouch.add(wearableItem4.clone());
-				wearableItem4 = new UnequippedA();
-			}
-		}
-
+	public Weapon getRangedWeapon() {
+		return rangedWeapon;
 	}
-
+	
+	
 	/**
-	 * 
-	 * @param item - item to be dropped
-	 * @return - the item that was dropped, if you had that item. else, drops unequipped placeholder
+	 * fill armor slots with unequipped item holder
 	 */
-	public Item dropItem(Item item) {
-		for (int i = 0; i < pouch.size(); i++) {
-			if (pouch.get(i) == item) {
-				pouch.remove(i);
-				return item;
-			}
-		}
-		return new UnequippedO();
+	protected void fillArmorWithUnequipped() {
+		helm = new Helm();
+		chestPiece = new Chestpiece();
+		gloves = new Gloves();
+		leggings = new Leggings();
+		boots = new Boots();
 	}
+	
+	
+	/**
+	 * fill weapon slots with unequipped item holder
+	 */
+	protected void fillWeaponsWithUnequipped() {
+		rangedWeapon = new Ranged();
+		meleeWeapon = new Melee();
+	}
+	
 }
