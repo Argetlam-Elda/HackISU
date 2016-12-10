@@ -19,6 +19,7 @@ public class Main {
 	/**
 	 * the PC, stores stats and items
 	 */
+
 	private static PlayerCharacter player;
 	
 	
