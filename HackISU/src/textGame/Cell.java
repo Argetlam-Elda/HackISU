@@ -17,13 +17,7 @@ public class Cell {
 	
 	
 	/**
-	 * terrain the cell will be set to
-	 */
-	private String terrain;
-	
-	
-	/**
-	 * flavortext for the cell
+	 * flavor text for the cell
 	 */
 	private String flavor;
 	
@@ -59,10 +53,14 @@ public class Cell {
 	
 	
 	/**
+	 * gold dropped by monsters in the cell
+	 */
+	public int gold;
+	
+	
+	/**
 	 * creates a cell object with the given values
 	 * 
-	 * @param t
-	 *            - terrain
 	 * @param f
 	 *            - flavor text
 	 * @param cMin
@@ -74,9 +72,8 @@ public class Cell {
 	 * @throws FileNotFoundException
 	 *             - because why not
 	 */
-	public Cell(World w, String t, String f, int cMin, int cMax, int numEnemies) throws FileNotFoundException {
+	public Cell(World w, String f, int cMin, int cMax, int numEnemies) throws FileNotFoundException {
 		world = w;
-		terrain = t;
 		flavor = f;
 		combatMin = cMin;
 		combatMax = cMax;
@@ -92,14 +89,6 @@ public class Cell {
 	 */
 	public String getFlavor() {
 		return flavor;
-	}
-	
-	
-	/**
-	 * @return - the terrain
-	 */
-	public String getTerrain() {
-		return terrain;
 	}
 	
 	
@@ -182,4 +171,46 @@ public class Cell {
 		return items;
 	}
 	
+	
+	/**
+	 * gets one item with the given name
+	 * 
+	 * @param name
+	 *            - name of the item to return
+	 * @return - an item with the given name, or null if it doesn't exist
+	 */
+	public Item getItem(String name) {
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i).getName().trim().equalsIgnoreCase(name)) {
+				return items.remove(i);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * get the gold currently in the cell
+	 * @return - amount of gold
+	 */
+	public int getGold() {
+		return gold;
+	}
+	
+	/**
+	 * adds gold to the cell's stockpile
+	 * @param g
+	 */
+	public void addGold(int g) {
+		gold += g;
+	}
+	
+	/**
+	 * take all gold from the cell
+	 * @return - the amount of gold that was in the cell
+	 */
+	public int takeGold() {
+		int temp = gold;
+		gold = 0;
+		return temp;
+	}
 }

@@ -1,45 +1,36 @@
 3 3 2 1
-VOLCANO
 This is actually a pretty normal place. The volcano is just a normal mountain. /
 4 4
 1
 
-FOREST
 You find yourself in a forest. You see a mountain in the west, looming over you. To the east, more stupid trees. /
 0 3
 2
 
-FOREST
 The forgotten forest. Villagers often forget this place's exsistance. South of you lies Plainville, west of you lies a normal forest. /
 0 3
 3
 
-FOREST
 A mountain looms in the north while a meadow of sunshine and butterflies exists in the south. Polar opposites. You are now thinking of ploar bears. /
 0 2
 2
 
-MEADOW
 Over the next hill to the east, you see the town of Plainville. It is named that for a reason. /
 0 1
 2
 
-TOWN
 You enter the town of Plainville. There are no monsters here, else there would be other problems. /
 0 0
 0
 
-MEADOW
 Full of sunshine and rainbows. Well, just figuratively. /
 0 1
 2
 
-MEADOW
 You find yourself in a meadow. to your north, meadow. To the east, meadow. To the west, meadow. You are reminded of the great cornfields of Iowa. /
 0 0
 0
 
-MEADOW
 You see the town of plainville to your north. You wonder if its named that because of location, or how drab the whole place is. /
 0 1
 2

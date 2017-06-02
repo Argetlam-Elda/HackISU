@@ -21,7 +21,7 @@ public abstract class Characters {
 	
 	
 	/**
-	 * TODO - the characer's bonus hit points, not yet implemented
+	 * the characer's bonus hit points
 	 */
 	protected int tempHitPoints;
 	
@@ -149,7 +149,9 @@ public abstract class Characters {
 	 *            - adds the item to the characters pouch
 	 */
 	public void addItem(Item item) {
-		pouch.add(item);
+		if (item != null) {
+			pouch.add(item);
+		}
 	}
 	
 }

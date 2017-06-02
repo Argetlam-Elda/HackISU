@@ -316,7 +316,7 @@ public class TestFrame extends JFrame implements KeyListener {
 		Scanner scan = new Scanner(enteredText);
 		if ((enteredText.length() != 0 && scan.hasNext())) {
 			userInput.setText("");
-			console.setText(console.getText() + ">>" + enteredText + "\n");
+			//console.setText(console.getText() + ">>" + enteredText + "\n");
 		}
 		Main.gameCommand(enteredText);
 		mainTextCropper();

@@ -5,12 +5,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-
-import textGame.Monster;
 import items.*;
 
 /**
- * @author Mitchell Bennett, edited by Colt Rogness
+ * @author Mitchell Bennett, Colt Rogness
  */
 public class World {
 	
@@ -98,7 +96,6 @@ public class World {
 					scan.close();
 					throw new IllegalArgumentException("Not enough cells to fill the map");
 				}
-				terrain = scan.next();
 				next = scan.next();
 				flavor = "";
 				while (next.equals("/") == false) {
@@ -110,7 +107,7 @@ public class World {
 				combatMax = scan.nextInt();
 				maxEnemies = scan.nextInt();
 				
-				grid[i][j] = new Cell(this, terrain, flavor, combatMin, combatMax, maxEnemies);
+				grid[i][j] = new Cell(this, flavor, combatMin, combatMax, maxEnemies);
 				flavor = "";
 			}
 		}

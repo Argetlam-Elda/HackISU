@@ -78,122 +78,77 @@ public class PlayerCharacter extends People {
 	 * @param equip
 	 *            - piece of armor to be equipped
 	 */
-	public void equip(Weapon equip) {
-		if (equip.getType() == ItemType.MELEE) {
+	public void equip(Item equip) {
+		if (equip == null) {
+			
+		}
+		else if (equip.getType() == ItemType.MELEE) {
 			if (!meleeWeapon.getName().equals("")) {
 				pouch.add(meleeWeapon);
 			}
-			meleeWeapon = equip.clone();
+			meleeWeapon = (Weapon) equip;
 		}
 		else if (equip.getType() == ItemType.RANGED) {
 			if (!rangedWeapon.getName().equals("")) {
 				pouch.add(rangedWeapon);
 			}
-			rangedWeapon = equip.clone();
+			rangedWeapon = (Weapon) equip;
 		}
-	}
-	
-	
-	/**
-	 * equip the given piece of armor
-	 * 
-	 * @param equip
-	 *            - piece of armor to be equipped
-	 */
-	public void equip(Armor equip) {
-		if (equip.getType() == ItemType.BOOTS) {
+		else if (equip.getType() == ItemType.BOOTS) {
 			if (!boots.getName().equals("")) {
 				pouch.add(boots);
 			}
-			boots = equip;
+			boots = (Armor) equip;
 		}
 		else if (equip.getType() == ItemType.CHESTPIECE) {
 			if (!chestPiece.getName().equals("")) {
 				pouch.add(chestPiece);
 			}
-			chestPiece = equip;
+			chestPiece = (Armor) equip;
 		}
 		else if (equip.getType() == ItemType.GLOVES) {
 			if (!gloves.getName().equals("")) {
 				pouch.add(gloves);
 			}
-			gloves = equip;
+			gloves = (Armor) equip;
 		}
 		else if (equip.getType() == ItemType.HELM) {
 			if (!helm.getName().equals("")) {
 				pouch.add(helm);
 			}
-			helm = equip;
+			helm = (Armor) equip;
 		}
 		else if (equip.getType() == ItemType.LEGGINGS) {
 			if (!leggings.getName().equals("")) {
 				pouch.add(leggings);
 			}
-			leggings = equip;
+			leggings = (Armor) equip;
 		}
 	}
 	
 	
-	/**
-	 * equip the item at location i in the player's pouch
-	 * 
-	 * @param i
-	 *            - location of the item to equip
-	 * @throws Exception
-	 */
-	public void equip(int i) throws Exception {
-		Item temp = null;
-		if (pouch.size() > i) {
-			if (pouch.get(i).getType() == ItemType.MELEE) {
-				temp = meleeWeapon.clone();
-				meleeWeapon = ((Weapon) pouch.get(i)).clone();
-			}
-			else if (pouch.get(i).getType() == ItemType.RANGED) {
-				temp = rangedWeapon.clone();
-				rangedWeapon = ((Weapon) pouch.get(i)).clone();
-			}
-			else if (pouch.get(i).getType() == ItemType.BOOTS) {
-				temp = (Armor) boots.clone();
-				boots = (Armor) pouch.get(i).clone();
-			}
-			else if (pouch.get(i).getType() == ItemType.CHESTPIECE) {
-				temp = (Armor) chestPiece.clone();
-				chestPiece = (Armor) pouch.get(i).clone();
-			}
-			else if (pouch.get(i).getType() == ItemType.GLOVES) {
-				temp = (Armor) gloves.clone();
-				gloves = (Armor) pouch.get(i).clone();
-			}
-			else if (pouch.get(i).getType() == ItemType.HELM) {
-				temp = (Armor) helm.clone();
-				helm = (Armor) pouch.get(i).clone();
-			}
-			else if (pouch.get(i).getType() == ItemType.LEGGINGS) {
-				temp = (Armor) leggings.clone();
-				leggings = (Armor) pouch.get(i).clone();
-			}
-			else {
-				throw new IllegalArgumentException("Cannot equip this item.");
-			}
-			if (temp != null) {
+	public void equip(String name) {
+		for (int i = 0; i < pouch.size(); i++) {
+			if (pouch.get(i).getName().trim().equalsIgnoreCase(name)) {
+				equip(pouch.get(i));
 				pouch.remove(i);
-				if (!temp.getName().equalsIgnoreCase("")) {
-					pouch.add(temp);
-				}
+				return;
 			}
-		}
-		else {
-			throw new Exception("There is no item at location i in the player's pouch");
 		}
 	}
 	
 	
 	/**
+	 * unequips the item passed to it and adds it to the pouch
+	 * 
 	 * @param unequip
-	 *            - weapon to be unequipped
+	 *            - Item to be unequipped
 	 */
-	public void unequipWeapon(Weapon unequip) {
-		if (unequip.getType() == ItemType.MELEE) {
+	public void unequip(Item unequip) {
+		if (unequip == null) {
+			
+		}
+		else if (unequip.getType() == ItemType.MELEE) {
 			if (!meleeWeapon.getName().equals("")) {
 				pouch.add(meleeWeapon.clone());
 			}
@@ -205,37 +160,36 @@ public class PlayerCharacter extends People {
 			}
 			rangedWeapon = new Ranged();
 		}
-	}
-	
-	
-	/**
-	 * unequips the given piece of armor and adds it to the pouch
-	 * 
-	 * @param unequip
-	 *            - piece of armor to be unequipped
-	 */
-	public void unEquipArmor(Armor unequip) {
-		if (unequip.getType() == ItemType.BOOTS) {
-			pouch.add(boots.clone());
+		else if (unequip.getType() == ItemType.BOOTS) {
+			if (!boots.getName().equals("")) {
+				pouch.add(boots.clone());
+			}
 			boots = new Boots();
 		}
 		else if (unequip.getType() == ItemType.CHESTPIECE) {
-			pouch.add(chestPiece.clone());
+			if (!chestPiece.getName().equals("")) {
+				pouch.add(chestPiece.clone());
+			}
 			chestPiece = new Chestpiece();
 		}
 		else if (unequip.getType() == ItemType.GLOVES) {
-			pouch.add(gloves.clone());
+			if (!gloves.getName().equals("")) {
+				pouch.add(gloves.clone());
+			}
 			gloves = new Gloves();
 		}
 		else if (unequip.getType() == ItemType.HELM) {
-			pouch.add(helm.clone());
+			if (!helm.getName().equals("")) {
+				pouch.add(helm.clone());
+			}
 			helm = new Helm();
 		}
 		else if (unequip.getType() == ItemType.LEGGINGS) {
-			pouch.add(leggings.clone());
+			if (!leggings.getName().equals("")) {
+				pouch.add(leggings.clone());
+			}
 			leggings = new Leggings();
 		}
-		
 	}
 	
 	
@@ -325,10 +279,10 @@ public class PlayerCharacter extends People {
 	@Override
 	public int getDefense() {
 		int AC = defense;
-		Armor[] equipped = getEquippedArmor();
-		for (int i = 0; i < equipped.length; i++) {
-			AC += equipped[i].getDefense();
-		}
+		AC += helm.getDefense();
+		AC += chestPiece.getDefense();
+		AC += boots.getDefense();
+		AC += leggings.getDefense();
 		return AC;
 	}
 	
@@ -367,6 +321,11 @@ public class PlayerCharacter extends People {
 	protected void fillWeaponsWithUnequipped() {
 		rangedWeapon = new Ranged();
 		meleeWeapon = new Melee();
+	}
+	
+	
+	public void heal(int i) {
+		currentHitPoints = Math.min(maxHitPoints + tempHitPoints, currentHitPoints + 1);
 	}
 	
 }
